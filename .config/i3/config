@@ -222,7 +222,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # Selfmade binds
 bindsym $mod+Shift+q kill
-bindsym $mod+x exec betterlockscreen --lock blur
+bindsym $mod+x exec i3lock-fancy
 
 bindsym --release Print exec "scrot -m ~/Images/screenshots/%s_%H%M_%d.%m.%Y_$wx$h.png"
 bindsym --release Shift+Print exec "scrot -s ~/Images/screenshots/%s_%H%M_%d%m%Y_$wx$h.png"
