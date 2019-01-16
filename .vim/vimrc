@@ -1,5 +1,6 @@
 set number relativenumber
-colorschem abstract
+"colorschem abstract
+colorschem vim-monokai-tasty
 syntax on
 set autoindent
 set smartindent
@@ -17,6 +18,15 @@ set softtabstop=0
 set expandtab 
 set shiftwidth=4 
 set smarttab
+
+" fix xterm Ctrl+arrow keys
+if &term =~ '^screen'
+    " tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
 
 autocmd FileType python inoremap <c-Space> <Esc>/#++#<Enter>"_c4l
 
