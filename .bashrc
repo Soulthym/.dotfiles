@@ -7,7 +7,7 @@ export PS1="\[$(tput setaf 70)\][\[$(tput setaf 45)\]\u\[$(tput setaf 33)\]@\[$(
 export VISUAL="vim"
 export HISTSIZE=-1
 export HISTFILESIZE=-1
-eval `dircolors ~/.dircolors`
+# eval `dircolors ~/.dircolors`
 alias ls="ls --color=auto"
 alias la="ls -la"
 alias l="ls -l"
