@@ -1,0 +1,65 @@
+set number relativenumber
+syntax on
+set autoindent
+set smartindent
+"set smarttab
+"set noexpandtab
+"set smartindent
+"set shiftwidth=4
+"set tabstop=4
+set nowrap
+set foldmethod=indent
+set foldlevelstart=20
+set nocompatible
+set tabstop=8 
+set softtabstop=0 
+set expandtab 
+set shiftwidth=4 
+set smarttab
+
+autocmd FileType python inoremap <c-Space> <Esc>/#++#<Enter>"_c4l
+
+autocmd FileType python nnoremap <buffer> <F9> <Esc>:w<CR>:!clear;optirun python %<CR>
+autocmd FileType python nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;python %<CR>
+autocmd FileType python inoremap ;( ()#++#<Esc>4hi
+autocmd FileType python inoremap ;{ {}#++#<Esc>4hi
+autocmd FileType python inoremap ;[ []#++#<Esc>4hi
+autocmd FileType python inoremap ;" ""#++#<Esc>4hi
+autocmd FileType python inoremap ;' ''#++#<Esc>4hi
+autocmd FileType python noremap <c-c> I#<Esc>
+autocmd FileType ruby noremap <c-c> I#<Esc>
+autocmd FileType ruby nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;ruby %<CR>
+"autocmd FileType python vnoremap <c-c> I#<Esc>
+nnoremap <space> za
+vnoremap <space> zf
+" CTRL-X and SHIFT-Del are Cut
+" vnoremap <C-x> "+x
+" vnoremap <S-Del> "+x
+
+" CTRL-Y and CTRL-Insert are Copy
+" vnoremap <C-y> "+y
+" vnoremap <C-Insert> "+y
+
+" CTRL-P and SHIFT-Insert are Paste
+" map <C-p>       "+gP
+" map <S-Insert>      "+gP
+
+" cmap <C-p>      <C-R>+
+" cmap <S-Insert>     <C-R>+
+
+" Pasting blockwise and linewise selections is not possible in Insert and
+" Visual mode without the +virtualedit feature.  They are pasted as if they
+" were characterwise instead.
+" Uses the paste.vim autoload script.
+
+" exe 'inoremap <script> <C-p>' paste#paste_cmd['i']
+" exe 'vnoremap <script> <C-p>' paste#paste_cmd['v']
+
+" imap <S-Insert>     <C-p>
+" vmap <S-Insert>     <C-p>
+
+autocmd FileType tex set wrap
+autocmd FileType tex nnoremap <Up> g<Up>
+autocmd FileType tex nnoremap <Down> g<Down>
+autocmd FileType tex nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;pdflatex %<CR>
+inoremap <S-Tab> <C-V><Tab>
