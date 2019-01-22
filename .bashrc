@@ -39,3 +39,4 @@ alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 #       dotf add <whatever file name>
 #       dotf commit -m <whatever message commit>
 #       dotf push
+neofetch
