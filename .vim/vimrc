@@ -74,3 +74,6 @@ autocmd FileType tex nnoremap <Up> g<Up>
 autocmd FileType tex nnoremap <Down> g<Down>
 autocmd FileType tex nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;pdflatex %<CR>
 inoremap <S-Tab> <C-V><Tab>
+
+execute pathogen#infect()
+filetype plugin indent on
