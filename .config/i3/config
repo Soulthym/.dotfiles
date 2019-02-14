@@ -235,7 +235,7 @@ exec_always feh --bg-scale ~/Images/wallpapers/gROOT.jpg
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 exec compton
-exec syncthing-gtk
+#exec syncthing-gtk
 exec_always device=$(xinput|grep Touchpad|cut -f2|cut -d= -f2);prop=$(xinput list-props $device|grep "Accel Speed (.*)"|sed "s/.*(\(.*\)).*/\1/");xinput set-prop $device $prop 0.05
 exec_always device=$(xinput|grep Touchpad|cut -f2|cut -d= -f2);prop=$(xinput list-props $device|grep "Tapping Enabled (.*)"|sed "s/.*(\(.*\)).*/\1/");xinput set-prop $device $prop 1
 exec_always device=$(xinput|grep Touchpad|cut -f2|cut -d= -f2);prop=$(xinput list-props $device|grep "Natural Scrolling Enabled (.*)"|sed "s/.*(\(.*\)).*/\1/");xinput set-prop $device $prop 1

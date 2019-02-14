@@ -16,7 +16,7 @@ alias p4="cd ~/code/PST/4/"
 alias ic="vim ~/.config/i3/config"
 
 alias inw="cd ~/inwibe"
-alias ci="~/inwibe/connect.sh"
+alias ci="~/inwibe/connect-prod.sh"
 
 alias com="git commit -m"
 alias push="git push"
