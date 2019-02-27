@@ -30,7 +30,7 @@ font pango:DejaVu Sans Mono 12, Awesome 12
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec konsole
+bindsym $mod+Return exec i3-sensible-terminal
 # i3-sensible-terminal
 
 # kill focused window
