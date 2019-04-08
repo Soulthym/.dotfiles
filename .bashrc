@@ -39,6 +39,6 @@ alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 #       dotf add <whatever file name>
 #       dotf commit -m <whatever message commit>
 #       dotf push
-neofetch
+#neofetch
 
 export QSYS_ROOTDIR="/home/soulthym/.cache/yay/quartus-free/pkg/quartus-free/opt/altera/18.1/quartus/sopc_builder/bin"
