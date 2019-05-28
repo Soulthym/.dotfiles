@@ -1,24 +1,48 @@
+" === Vundle ===
+set shell=/bin/bash           " required for use in non-POSIX compliant shells
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+" === vimrc ===
 set number relativenumber
-"colorschem abstract
-colorschem vim-monokai-tasty
-syntax on
-set autoindent
-set smartindent
-"set smarttab
-"set noexpandtab
-"set smartindent
-"set shiftwidth=4
-"set tabstop=4
 set nowrap
-set foldmethod=indent
-set foldlevelstart=20
-set nocompatible
-set tabstop=8 
-set softtabstop=0 
-set expandtab 
-set shiftwidth=4 
-set smarttab
-set clipboard=unnamedplus
+" Use 24-bit (true-color) mode in Vim/Neovim when outside tmux or screen.
+" If you're using tmux version 2.2 or later, you can remove the outermost $TMUX
+" check and use tmux's 24-bit color support
+" (http://sunaku.github.io/tmux-24bit-color.html#usage for more information.)
+if empty($TMUX) && empty($STY)
+  " See https://gist.github.com/XVilka/8346728.
+  if $COLORTERM =~# 'truecolor' || $COLORTERM =~# '24bit'
+    if has('termguicolors')
+      " See :help xterm-true-color
+      if $TERM =~# '^screen'
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+      endif
+      set termguicolors
+    endif
+  endif
+endif
 
 " fix xterm Ctrl+arrow keys
 if &term =~ '^screen'
@@ -29,19 +53,109 @@ if &term =~ '^screen'
     execute "set <xLeft>=\e[1;*D"
 endif
 
-autocmd FileType python inoremap <c-Space> <Esc>/#++#<Enter>"_c4l
+"=== python section ===
+" utf-8 support
+au BufNewFile,BufRead *.py set encoding=utf-8
 
-autocmd FileType python nnoremap <buffer> <F9> <Esc>:w<CR>:!clear;optirun python %<CR>
-autocmd FileType python nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;python %<CR>
-autocmd FileType python inoremap ;( ()#++#<Esc>4hi
-autocmd FileType python inoremap ;{ {}#++#<Esc>4hi
-autocmd FileType python inoremap ;[ []#++#<Esc>4hi
-autocmd FileType python inoremap ;" ""#++#<Esc>4hi
-autocmd FileType python inoremap ;' ''#++#<Esc>4hi
+" PEP8
+au BufNewFile,BufRead *.py 
+   \set tabstop=4       | 
+   \set softtabstop=4   | 
+   \set shiftwidth=4    | 
+   \set textwidth=79    | 
+   \set expandtab       | 
+   \set autoindent      | 
+   \set fileformat=unix
+
+" Better indentation
+Plugin 'vim-scripts/indentpython.vim'
+
+" Should flag trailing whitespaces
+"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+" Auto-complete
+Plugin 'Valloric/YouCompleteMe'
+" Need to compile upon updates to their API:
+" cd ~/.vim/bundle/YouCompleteMe/
+" python3 install.py [--clang-completer] 
+" # See README.md for more informations on the supported languages
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+"" Syntax Checking
+"Plugin 'vim-syntastic/syntastic'
+
+" PEP8 Checking
+Plugin 'nvie/vim-flake8'
+
+" Color-Scheme
+Plugin 'fatih/molokai'
+Plugin 'maksimr/Lucius2'
+Plugin 'liuchengxu/space-vim-theme'
+Plugin 'ntk148v/vim-horizon'
+Plugin 'chase/focuspoint-vim'
+Plugin 'yous/vim-open-color'
+Plugin 'BarretRen/vim-colorscheme'
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+set background=dark
+if has('gui_running')
+  colorscheme solarized
+else
+  "colorscheme molokai
+  "colorscheme PaperColor
+  "colorscheme lucius
+  "colorscheme space_vim_theme
+  "colorscheme horizon
+  colorscheme open-color
+  "colorscheme focuspoint
+  "colorscheme monokai
+  "colorscheme zenburn
+endif
+call togglebg#map("<F12>")
+
+" python pretty
+let python_highlight_all=1
+syntax on
+
+" File browsing
+Plugin 'scrooloose/nerdtree'
+nnoremap <C-n> :NERDTreeToggle<CR>
+" same for tabs
+Plugin 'jistr/vim-nerdtree-tabs' 
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+" Super Searching
+Plugin 'kien/ctrlp.vim'
+
+" Git integration 
+Plugin 'tpope/vim-fugitive'
+
+" Powerline
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+" shared clipboard
+set clipboard=unnamed
+
+" Personal shortcuts
+autocmd FileType python inoremap <c-Space> <Esc>/#++#<Enter>"_c4l
+autocmd FileType python nnoremap <buffer> <F5> <Esc>:w<CR>:!python %<CR>
 autocmd FileType python noremap <c-c> I#<Esc>
+autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
+
+
 autocmd FileType ruby noremap <c-c> I#<Esc>
 autocmd FileType ruby nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;ruby %<CR>
-"autocmd FileType python vnoremap <c-c> I#<Esc>
 nnoremap <space> za
 vnoremap <space> zf
 
@@ -53,5 +167,4 @@ inoremap <S-Tab> <C-V><Tab>
 autocmd FileType sh noremap <c-c> I#<Esc>
 autocmd FileType sh nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;bash %<CR>
 
-execute pathogen#infect()
-filetype plugin indent on
+" filetype plugin indent on

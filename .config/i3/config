@@ -211,8 +211,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 bindsym $mod+F7 exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec sudo ~/.scripts/brightness.sh -i 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec sudo ~/.scripts/brightness.sh -d 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec sudo ~/.scripts/brightness -i 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec sudo ~/.scripts/brightness -d 5 # decrease screen brightness
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
@@ -221,6 +221,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Selfmade binds
+bindsym $mod+@ exec sudo ~/.scripts/access-point.sh # start access point
 bindsym $mod+Shift+q kill
 bindsym $mod+x exec i3lock-fancy-rapid 3 5
 
