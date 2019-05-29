@@ -240,7 +240,7 @@ exec compton --config .config/compton/compton.conf
 exec_always device=$(xinput|grep Touchpad|cut -f2|cut -d= -f2);prop=$(xinput list-props $device|grep "Accel Speed (.*)"|sed "s/.*(\(.*\)).*/\1/");xinput set-prop $device $prop 0.05
 exec_always device=$(xinput|grep Touchpad|cut -f2|cut -d= -f2);prop=$(xinput list-props $device|grep "Tapping Enabled (.*)"|sed "s/.*(\(.*\)).*/\1/");xinput set-prop $device $prop 1
 exec_always device=$(xinput|grep Touchpad|cut -f2|cut -d= -f2);prop=$(xinput list-props $device|grep "Natural Scrolling Enabled (.*)"|sed "s/.*(\(.*\)).*/\1/");xinput set-prop $device $prop 1
-#exec_always --no-startup-id nm-applet
+exec_always --no-startup-id nm-applet
 
 # I3 + KDE integration
 #exec --no-startup-id plasmashell
