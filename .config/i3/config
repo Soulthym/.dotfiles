@@ -223,7 +223,7 @@ bindsym XF86AudioPrev exec playerctl previous
 # Selfmade binds
 bindsym $mod+@ exec sudo ~/.scripts/access-point.sh # start access point
 bindsym $mod+Shift+q kill
-bindsym $mod+x exec i3lock-fancy-rapid 3 5
+#bindsym $mod+x exec i3lock-fancy-rapid 3 5
 
 bindsym --release Print exec "scrot -m ~/Images/screenshots/%s_%H%M_%d.%m.%Y_$wx$h.png"
 bindsym --release Shift+Print exec "scrot -s ~/Images/screenshots/%s_%H%M_%d%m%Y_$wx$h.png"
