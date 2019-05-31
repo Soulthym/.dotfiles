@@ -31,6 +31,7 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec st /bin/bash
 bindsym $mod+Return exec konsole
 # i3-sensible-terminal
 
@@ -229,7 +230,6 @@ bindsym --release Print exec "scrot -m ~/Images/screenshots/%s_%H%M_%d.%m.%Y_$wx
 bindsym --release Shift+Print exec "scrot -s ~/Images/screenshots/%s_%H%M_%d%m%Y_$wx$h.png"
 bindsym --release $mod+Shift+Print exec "scrot -u -d 4 ~/Images/screenshots/%s_%H%M_%d%m%Y_$wx$h.png"
 
-# i3lock
 bindsym $mod+d exec rofi -show run -config ~/.config/rofi/themes/one-dark.rasi
 # Selfmade startup scripts
 exec_always feh --bg-scale ~/Pictures/Wallpaper/gRoot.jpg
@@ -244,7 +244,7 @@ exec_always device=$(xinput|grep Touchpad|cut -f2|cut -d= -f2);prop=$(xinput lis
 
 # I3 + KDE integration
 #exec --no-startup-id plasmashell
-#exec --no-startup-id wmctrl -c Plasma
-#for_window [title="Desktop — Plasma"] kill; floating enable; border none
-#force_display_urgency_hint 0 ms
-#focus_on_window_activation urgent
+#exec_always --no-startup-id wmctrl -c Plasma
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
+force_display_urgency_hint 0 ms
+focus_on_window_activation urgent
