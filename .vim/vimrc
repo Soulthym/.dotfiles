@@ -53,6 +53,9 @@ if &term =~ '^screen'
     execute "set <xLeft>=\e[1;*D"
 endif
 
+" Folding
+set foldmethod=manual
+
 "=== python section ===
 " utf-8 support
 au BufNewFile,BufRead *.py set encoding=utf-8
