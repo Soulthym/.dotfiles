@@ -248,3 +248,14 @@ exec_always device=$(xinput|grep Touchpad|cut -f2|cut -d= -f2);prop=$(xinput lis
 for_window [title="Desktop — Plasma"] kill; floating enable; border none
 force_display_urgency_hint 0 ms
 focus_on_window_activation urgent
+
+## Avoid tiling popups, dropdown windows from plasma
+# for the first time, manually resize them, i3 will remember the setting for floating windows
+for_window [class="plasmashell"] floating enable
+for_window [class="Plasma"] floating enable, border none
+for_window [title="plasma-desktop"] floating enable, border none
+for_window [title="win7"] floating enable, border none
+for_window [class="krunner"] floating enable, border none
+for_window [class="Kmix"] floating enable, border none
+for_window [class="Klipper"] floating enable, border none
+for_window [class="Plasmoidviewer"] floating enable, border none
