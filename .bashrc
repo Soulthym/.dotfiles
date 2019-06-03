@@ -41,4 +41,8 @@ alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 #       dotf push
 #neofetch
 
+#vim
+alias vim=nvim
+alias v=nvim
+
 export QSYS_ROOTDIR="/home/soulthym/.cache/yay/quartus-free/pkg/quartus-free/opt/altera/18.1/quartus/sopc_builder/bin"
