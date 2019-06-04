@@ -194,3 +194,16 @@ autocmd FileType sh nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;bash %<CR>
 "autocmd Filetype python nnoremap <buffer> <F5> :w<CR>:vert ter python3 "%"<CR>
 autocmd Filetype python vnoremap <buffer> <F5> :w<CR>:'<'>vert ter python3<CR>
 
+function! Append(l1, l2, buffer)
+  let currentBuffer = @%
+  let currentRegister = @z
+  execute a:l1 . "," . a:l2 . 'y z'
+  execute "buffer " . a:buffer
+  normal G"zp<C-O>
+  let @z = currentRegister
+  execute "buffer " . currentBuffer
+endfunction
+
+
+
+command! -nargs=1 -complete=buffer -range Append call Append(<line1>, <line2>, <f-args>)
