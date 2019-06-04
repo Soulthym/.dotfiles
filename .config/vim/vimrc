@@ -52,6 +52,10 @@ if &term =~ '^screen'
     execute "set <xLeft>=\e[1;*D"
 endif
 
+" Search highlight
+set hlsearch
+nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
+
 " Folding
 set foldmethod=manual
 
