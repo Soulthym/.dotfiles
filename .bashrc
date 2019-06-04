@@ -4,7 +4,8 @@ parse_git_branch() {
 shopt -s autocd
 
 export PS1="\[$(tput setaf 70)\][\[$(tput setaf 45)\]\u\[$(tput setaf 33)\]@\[$(tput setaf 63)\]\h\[$(tput setaf 166)\] \W\[$(tput setaf 70)\]]\[$(tput setaf 166)\]\$(parse_git_branch)\[$(tput setaf 15)\]\$\[$(tput sgr0)\] "
-export VISUAL="vim"
+export VISUAL="nvim"
+export EDITOR="nvim"
 export HISTSIZE=-1
 export HISTFILESIZE=-1
 # eval `dircolors ~/.dircolors`
