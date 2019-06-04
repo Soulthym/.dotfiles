@@ -170,6 +170,10 @@ autocmd FileType python inoremap <c-Space> <Esc>/#++#<Enter>"_c4l
 autocmd FileType python noremap <c-c> I#<Esc>
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 
+" ipython-like
+autocmd FileType python noremap <F8> <Esc>o#BLOCK#<Esc>
+autocmd FileType python noremap <F20> <Esc>O#BLOCK#<Esc>
+autocmd FileType python noremap <F9> <Esc>?#BLOCK#<CR>V/#BLOCK#<CR>"py<ESC>:python3 << EOF<CR><C-r>p<CR>EOF<CR>
 
 autocmd FileType ruby noremap <c-c> I#<Esc>
 autocmd FileType ruby nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;ruby %<CR>
