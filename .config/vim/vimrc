@@ -23,6 +23,8 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 " === vimrc ===
+set splitright
+set splitbelow
 set number relativenumber
 set nowrap
 " Use 24-bit (true-color) mode in Vim/Neovim when outside tmux or screen.
