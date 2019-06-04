@@ -160,7 +160,7 @@ Plugin 'mbbill/undotree'
 nnoremap <S-U> :UndotreeToggle<cr>
 
 " shared clipboard
-" set clipboard=quoteplus
+set clipboard=unnamedplus
 
 " Personal shortcuts
 autocmd FileType python inoremap <c-Space> <Esc>/#++#<Enter>"_c4l
