@@ -174,13 +174,33 @@ let g:airline_powerline_fonts = 1
 " Undo-tree
 Plugin 'mbbill/undotree'
 nnoremap <S-U> :UndotreeToggle<cr>
+" Put plugins and dictionaries in this dir (also on Windows)
+let vimDir = '$HOME/.config/vim'
+let &runtimepath.=','.vimDir
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let myUndoDir = expand(vimDir . '/.undodir')
+    " Create dirs
+    call system('mkdir ' . vimDir)
+    call system('mkdir ' . myUndoDir)
+    let &undodir = myUndoDir
+    set undofile
+endif
+
+" Async run
+Plugin 'skywind3000/asyncrun.vim'
+let g:asyncrun_status = "stopped" 
+let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+" Plugin 'hauleth/asyncdo.vim'
+let $PYTHONUNBUFFERED=1
 
 " shared clipboard
 set clipboard=unnamedplus
 
 " Personal shortcuts
 autocmd FileType python inoremap <c-Space> <Esc>/#++#<Enter>"_c4l
-"autocmd FileType python nnoremap <buffer> <F5> <Esc>:w<CR>:!python %<CR>
+autocmd FileType python nnoremap <buffer> <F5> <Esc>:w<CR>:!python %<CR>
 autocmd FileType python noremap <c-c> I#<Esc>
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 
@@ -191,8 +211,6 @@ autocmd FileType python noremap <F9> <Esc>?#BLOCK#<CR>V/#BLOCK#<CR>"py<ESC>:pyth
 
 autocmd FileType ruby noremap <c-c> I#<Esc>
 autocmd FileType ruby nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;ruby %<CR>
-nnoremap <space> za
-vnoremap <space> zf
 
 autocmd FileType tex set wrap
 autocmd FileType tex nnoremap <Up> g<Up>
@@ -206,7 +224,7 @@ autocmd FileType sh nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;bash %<CR>
 
 " Bind F5 to save file if modified and execute python script in a buffer.
 "autocmd Filetype python nnoremap <buffer> <F5> :w<CR>:vert ter python3 "%"<CR>
-autocmd Filetype python vnoremap <buffer> <F5> :w<CR>:'<'>vert ter python3<CR>
+"autocmd Filetype python vnoremap <buffer> <F5> :w<CR>:'<'>vert ter python3<CR>
 
 function! Append(l1, l2, buffer)
   let currentBuffer = @%
@@ -217,7 +235,5 @@ function! Append(l1, l2, buffer)
   let @z = currentRegister
   execute "buffer " . currentBuffer
 endfunction
-
-
 
 command! -nargs=1 -complete=buffer -range Append call Append(<line1>, <line2>, <f-args>)
