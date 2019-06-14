@@ -60,6 +60,11 @@ nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 
 " Folding
 set foldmethod=manual
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview 
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
+" Plugin 'Konfekt/FastFold'
 
 "=== python section ===
 " utf-8 support
@@ -76,7 +81,16 @@ au BufNewFile,BufRead *.py
    \set fileformat=unix
 
 " Better indentation
-Plugin 'vim-scripts/indentpython.vim'
+" Plugin 'vim-scripts/indentpython.vim'
+" Plugin 'tmhedberg/SimpylFold'
+" let g:SimpylFold_docstring_preview=1
+" let g:SimpylFold_fold_docstring=1
+" let b:SimpylFold_fold_docstring=1
+" let g:SimpylFold_fold_import=1
+" let b:SimpylFold_fold_import=1
+" autocmd FileType python set foldmethod=indent
+" autocmd FileType python set foldnestmax=1
+autocmd FileType python set foldcolumn=1
 
 " Should flag trailing whitespaces
 "au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
