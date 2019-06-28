@@ -81,7 +81,7 @@ au BufNewFile,BufRead *.py
    \set fileformat=unix
 
 " Better indentation
-" Plugin 'vim-scripts/indentpython.vim'
+Plugin 'vim-scripts/indentpython.vim'
 " Plugin 'tmhedberg/SimpylFold'
 " let g:SimpylFold_docstring_preview=1
 " let g:SimpylFold_fold_docstring=1
