@@ -14,6 +14,7 @@ alias la="ls -la"
 alias l="ls -l"
 alias tf="cd ~/code/python/3/tensorflow-tests/"
 alias p4="cd ~/code/PST/4/"
+alias ee="cd ~/code/PST/4/eureka-effect"
 alias ic="vim ~/.config/i3/config"
 
 alias inw="cd ~/inwibe"
