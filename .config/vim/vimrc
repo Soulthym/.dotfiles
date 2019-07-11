@@ -100,6 +100,9 @@ set fileformat=unix
 "set expandtab
 
 "=== python section ===
+" jupyter integration
+Plugin 'jupyter-vim/jupyter-vim'
+
 " utf-8 support
 au BufNewFile,BufRead *.py set encoding=utf-8
 
