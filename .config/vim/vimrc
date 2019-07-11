@@ -27,6 +27,7 @@ set splitright
 set splitbelow
 set number relativenumber
 set nowrap
+map <F10> :w! \| !compiler <c-r>%<CR>
 " Use 24-bit (true-color) mode in Vim/Neovim when outside tmux or screen.
 " If you're using tmux version 2.2 or later, you can remove the outermost $TMUX
 " check and use tmux's 24-bit color support
@@ -74,6 +75,20 @@ autocmd BufWinEnter *.* silent loadview
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 Plugin 'Konfekt/FastFold'
+
+"=== groff-ms section == 
+au BufNewFile,BufRead *.ms
+   \set tabstop=4       | 
+   \set softtabstop=4   | 
+   \set shiftwidth=4    | 
+   \set expandtab       | 
+   \set autoindent      | 
+   \set fileformat=unix
+autocmd FileType ms set wrap
+autocmd FileType ms nnoremap <Up> g<Up>
+autocmd FileType ms nnoremap <Down> g<Down>
+autocmd FileType ms nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;groff -ms % -T pdf > out.pdf<CR>
+autocmd Filetype ms noremap <F5> <Esc>:w! \| !compiler <c-r>%<CR>
 
 "=== shell section ===
 set tabstop=4
