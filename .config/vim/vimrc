@@ -70,6 +70,7 @@ function! MyFoldText()
 endfunction
 set foldtext=MyFoldText()
 set foldmethod=manual
+set viewoptions-=options
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview 
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
@@ -87,8 +88,8 @@ au BufNewFile,BufRead *.ms
 autocmd FileType ms set wrap
 autocmd FileType ms nnoremap <Up> g<Up>
 autocmd FileType ms nnoremap <Down> g<Down>
-autocmd FileType ms nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;groff -ms % -T pdf > out.pdf<CR>
-autocmd Filetype ms noremap <F5> <Esc>:w! \| !compiler <c-r>%<CR>
+" autocmd FileType ms nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;groff -ms % -T pdf > out.pdf<CR>
+" autocmd Filetype ms noremap <F5> <Esc>:w! \| !compiler <c-r>%<CR>
 
 "=== shell section ===
 set tabstop=4
@@ -101,7 +102,25 @@ set fileformat=unix
 
 "=== python section ===
 " jupyter integration
-Plugin 'jupyter-vim/jupyter-vim'
+" Plugin 'jupyter-vim/jupyter-vim'
+
+" ipython integration
+" Plugin 'ivanov/vim-ipython'
+Plugin 'bfredl/nvim-ipy'
+"Doc : https://github.com/bfredl/nvim-ipy
+let g:nvim_ipy_perform_mappings = 0
+let g:ipy_celldef = '^##'
+"
+autocmd Filetype python map <silent> <F4> <Plug>(IPy-Run)
+autocmd Filetype python map <silent> <F5> <Plug>(IPy-RunCell)
+autocmd Filetype python imap <silent> <c-n> <Plug>(IPy-Complete)
+autocmd Filetype python map <silent> <F2> <Plug>(IPy-WordObjInfo)
+autocmd Filetype python map <silent> <F9> <Plug>(IPy-Interrupt)
+autocmd Filetype python map <silent> <F10> <Plug>(IPy-Terminate)
+
+"autocmd Filetype python map <silent> <c-s> <Plug>(IPy-RunAll)
+"autocmd Filetype python map <silent> <c-s> <Plug>(IPy-WordObjInfo)
+"autocmd Filetype python map <silent> <c-s> <Plug>(IPy-RunAll)
 
 " utf-8 support
 au BufNewFile,BufRead *.py set encoding=utf-8
@@ -165,10 +184,8 @@ Plugin 'chase/focuspoint-vim'
 Plugin 'yous/vim-open-color'
 Plugin 'BarretRen/vim-colorscheme'
 Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
-set background=dark
 if has('gui_running')
-  colorscheme solarized
+  colorscheme open-color
 else
   "colorscheme molokai
   "colorscheme PaperColor
@@ -180,7 +197,6 @@ else
   "colorscheme monokai
   "colorscheme zenburn
 endif
-call togglebg#map("<F12>")
 
 " python pretty
 let python_highlight_all=1
@@ -236,25 +252,20 @@ set clipboard=unnamedplus
 
 " Personal shortcuts
 autocmd FileType python inoremap <c-Space> <Esc>/#++#<Enter>"_c4l
-autocmd FileType python nnoremap <buffer> <F5> <Esc>:w<CR>:!python %<CR>
+" autocmd FileType python nnoremap <buffer> <F5> <Esc>:w<CR>:!python %<CR>
 autocmd FileType python noremap <c-c> I#<Esc>
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
 
 " ipython-like
-autocmd FileType python noremap <F8> <Esc>o#BLOCK#<Esc>
-autocmd FileType python noremap <F20> <Esc>O#BLOCK#<Esc>
-autocmd FileType python noremap <F9> <Esc>?#BLOCK#<CR>V/#BLOCK#<CR>"py<ESC>:python3 << EOF<CR><C-r>p<CR>EOF<CR>
-
-autocmd FileType ruby noremap <c-c> I#<Esc>
-autocmd FileType ruby nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;ruby %<CR>
+" autocmd FileType python noremap <F8> <Esc>o#BLOCK#<Esc>
+" autocmd FileType python noremap <F20> <Esc>O#BLOCK#<Esc>
+" autocmd FileType python noremap <F9> <Esc>?#BLOCK#<CR>V/#BLOCK#<CR>"py<ESC>:python3 << EOF<CR><C-r>p<CR>EOF<CR>
 
 autocmd FileType tex set wrap
 autocmd FileType tex nnoremap <Up> g<Up>
 autocmd FileType tex nnoremap <Down> g<Down>
-autocmd FileType tex nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;pdflatex %<CR>
 inoremap <S-Tab> <C-V><Tab>
 autocmd FileType sh noremap <c-c> I#<Esc>
-autocmd FileType sh nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;bash %<CR>
 
 " filetype plugin indent on
 
