@@ -1,9 +1,77 @@
-parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+#shopt -s promptvars dotglob histappend no_empty_cmd_completion cdspell xpg_echo
+ 
+function parse_git_dirty {
+  echo -n $(git status 2>/dev/null | awk  '
+BEGIN {
+	state=""
+	untracked=""
+	changes=""
 }
+{ 
+	if ($0 == "Changes to be committed:") {
+  		state = "uncommitted"
+	} else if ($0 == "Untracked files:") {
+  		untracked = "new"
+	} else if ($0 == "Changes not staged for commit:") {
+		changes = "modified"
+	}
+}
+END {
+	printf "%s", state
+	printf " %s", changes
+	printf " %s", untracked
+}
+')
+}
+function parse_git_remote {
+  echo -n $(git status 2>/dev/null | awk '/Your branch is (ahead|behind)/ { print $4 }')
+}
+function custom_prompt {
+	local _green="\[$(tput setaf 70)\]"
+	local _light_green="\[$(tput setaf 64)\]"
+	local _light_blue="\[$(tput setaf 45)\]"
+	local _electric_blue="\[$(tput setaf 33)\]"
+	local _dark_blue="\[$(tput setaf 63)\]"
+	local _orange="\[$(tput setaf 166)\]"
+	local _white="\[$(tput setaf 15)\]"
+	local _red="\[$(tput setaf 161)\]"
+	local _reset="\[$(tput sgr0)\]"
+
+	local _git_branch=$(git branch --no-color 2> /dev/null | cut -d ' ' -f2| tr -d " ")
+	local _git_dirty=$(parse_git_dirty)
+	local _git_remote=$(parse_git_remote)
+
+	PS1="$_green["
+	PS1+="$_light_blue\u"
+	PS1+="$_electric_blue@"
+	PS1+="$_dark_blue\h "
+	PS1+="$_orange\W"
+	PS1+="$_green]"
+	if [[ -n $_git_branch ]]; then
+		PS1+=" $_green("
+		PS1+="$_light_blue$_git_branch"
+		if [[ -n $_git_dirty$_git_remote ]]; then
+			PS1+=$_electric_blue"=>"
+			_sep=""
+			if [[ $_git_dirty == *"uncommitted"* ]]; then
+				PS1+=$_electric_blue"/"$_green"commit"
+				_sep=$_electric_blue"-"
+			fi
+			if [[ $_git_dirty == *"modified"* ]]; then
+				PS1+=$_sep$_red"mod"
+				_sep=$_electric_blue"-"
+			fi
+			[[ $_git_dirty == *"new"* ]] && PS1+=$_sep$_dark_blue"new"
+			[[ -n $_git_remote ]] && PS1+="$_light_green$_git_remote"
+		fi
+		PS1+="$_green)"
+	fi
+	PS1+="$_white\$"
+	PS1+="$_reset "
+}
+PROMPT_COMMAND='custom_prompt'
 shopt -s autocd
 
-export PS1="\[$(tput setaf 70)\][\[$(tput setaf 45)\]\u\[$(tput setaf 33)\]@\[$(tput setaf 63)\]\h\[$(tput setaf 166)\] \W\[$(tput setaf 70)\]]\[$(tput setaf 166)\]\$(parse_git_branch)\[$(tput setaf 15)\]\$\[$(tput sgr0)\] "
 export VISUAL="nvim"
 export EDITOR="nvim"
 export HISTSIZE=-1
