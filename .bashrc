@@ -37,7 +37,7 @@ function custom_prompt {
 	local _red="\[$(tput setaf 161)\]"
 	local _reset="\[$(tput sgr0)\]"
 
-	local _git_branch=$(git branch --no-color 2> /dev/null | cut -d ' ' -f2| tr -d " ")
+	local _git_branch=$(git branch --no-color 2> /dev/null | awk '/\*/ {print $2}' | tr -d " ")
 	local _git_dirty=$(parse_git_dirty)
 	local _git_remote=$(parse_git_remote)
 
