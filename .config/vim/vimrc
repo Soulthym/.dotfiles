@@ -113,14 +113,11 @@ let g:ipy_celldef = '^##'
 "
 autocmd Filetype python map <silent> <F4> <Plug>(IPy-Run)
 autocmd Filetype python map <silent> <F5> <Plug>(IPy-RunCell)
+autocmd Filetype python map <silent> <F6> <Plug>(IPy-RunAll)
 autocmd Filetype python imap <silent> <c-n> <Plug>(IPy-Complete)
 autocmd Filetype python map <silent> <F2> <Plug>(IPy-WordObjInfo)
 autocmd Filetype python map <silent> <F9> <Plug>(IPy-Interrupt)
 autocmd Filetype python map <silent> <F10> <Plug>(IPy-Terminate)
-
-"autocmd Filetype python map <silent> <c-s> <Plug>(IPy-RunAll)
-"autocmd Filetype python map <silent> <c-s> <Plug>(IPy-WordObjInfo)
-"autocmd Filetype python map <silent> <c-s> <Plug>(IPy-RunAll)
 
 " utf-8 support
 au BufNewFile,BufRead *.py set encoding=utf-8
