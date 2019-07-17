@@ -48,7 +48,7 @@ function custom_prompt {
 	PS1+="$_orange\W"
 	PS1+="$_green]"
 	if [[ -n $_git_branch ]]; then
-		PS1+=" $_green("
+		PS1+="$_green("
 		PS1+="$_light_blue$_git_branch"
 		if [[ -n $_git_dirty$_git_remote ]]; then
 			PS1+=$_electric_blue"=>"
