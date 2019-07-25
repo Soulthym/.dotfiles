@@ -27,7 +27,7 @@ set splitright
 set splitbelow
 set number relativenumber
 set nowrap
-map <F10> :w! \| !compiler <c-r>%<CR>
+map <F10> :w! \| !./.compile.sh <c-r>%<CR>
 " Use 24-bit (true-color) mode in Vim/Neovim when outside tmux or screen.
 " If you're using tmux version 2.2 or later, you can remove the outermost $TMUX
 " check and use tmux's 24-bit color support
