@@ -62,7 +62,7 @@ nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 " Folding
 function! MyFoldText()
     let nl = v:foldend - v:foldstart + 1
-    let header = substitute(getline(v:foldstart),"^ *","",1)
+    let header = getline(v:foldstart)
     "let tailer = substitute(getline(v:foldend - 1),"^ *","",1)
     "let txt = header . '{ ' . tailer .' }' . ' --- ' . nl . ' lines'
     let txt = header . ' --- ' . nl . ' lines'
