@@ -62,7 +62,7 @@ function custom_prompt {
 				_sep=$_electric_blue"-"
 			fi
 			[[ $_git_dirty == *"new"* ]] && PS1+=$_sep$_dark_blue"new"
-			[[ -n $_git_remote ]] && PS1+="$_light_green$_git_remote"
+			[[ -n $_git_remote ]] && PS1+="$_light_green<$_git_remote>"
 		fi
 		PS1+="$_green)"
 	fi
