@@ -62,7 +62,7 @@ font-2 = "Noto Sans:size=11;1"
 font-3 = "FontAwesome:pixelsize=10"
 modules-left = bspwm i3
 ;modules-center = mpd
-modules-center = filesystem pulseaudio memory cpu wlan eth battery temperature gpu date 
+modules-center = filesystem pulseaudio memory cpu wlan eth battery temperature date 
 
 tray-position = right
 tray-padding = 2
@@ -285,7 +285,7 @@ bar-volume-empty-foreground = ${colors.c2}
 
 [module/battery]
 type = internal/battery
-battery = BAT1
+battery = BAT0
 adapter = ADP1
 full-at = 98
 

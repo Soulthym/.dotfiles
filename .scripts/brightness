@@ -1,0 +1,33 @@
+#! /bin/bash
+shopt -s extglob
+brightness_path="/sys/class/backlight/intel_backlight"
+max=$(cat $brightness_path/max_brightness)
+current=$(cat $brightness_path/brightness)
+currentp=$(echo "$current*100/$max"| bc | sed "s/\..*$//")
+value=$(echo $2 | sed "s/\..*$//")
+
+case $1 in 
+    -i|--inc)
+        new_value=$((currentp + value))
+        ;;
+    -d|--dec)
+        new_value=$((currentp - value))
+        ;;
+    -s|--set)
+        new_value=$value
+        ;;
+    *)
+        echo error
+        exit -1
+        ;;
+esac
+[[ 1 -gt $new_value ]] && new_value=1
+[[ 100 -lt $new_value ]] && new_value=100
+
+echo "$max/100*$new_value" \
+    | bc \
+    | sed "s/\..*$//" > /sys/class/backlight/intel_backlight/brightness 
+current_brightness=$(echo "$(cat $brightness_path/brightness)*100/$max" \
+    | bc \
+    | sed "s/\..*$//")
+echo brightness:$current_brightness%
