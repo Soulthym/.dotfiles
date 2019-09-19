@@ -91,7 +91,8 @@ alias ci="~/inwibe/connect-prod.sh"
 alias com="git commit -m"
 alias push="git push"
 alias status="git status"
-alias add="git add .;git add -u"
+#alias add="git add .;git add -u"
+alias add="git add"
 alias pull="git pull"
 
 alias opy="optirun python"
@@ -99,6 +100,10 @@ alias py="python"
 alias log1="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 alias log2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 alias log="git log --all --decorate --oneline --graph"
+
+alias momdoc="w3m https://schaffter.ca/mom/momdoc/toc.html"
+alias co="cd ~/code/"
+
 ### DOTFILES ###
 # init your repo with:
 #       git init --bare $HOME/.dotfiles
