@@ -72,18 +72,18 @@ set foldtext=MyFoldText()
 set foldmethod=manual
 set viewoptions-=options
 autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview 
+autocmd BufWinEnter *.* silent loadview
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 Plugin 'Konfekt/FastFold'
 
-"=== groff-ms section == 
+"=== groff-ms section ==
 au BufNewFile,BufRead *.ms
-   \set tabstop=4       | 
-   \set softtabstop=4   | 
-   \set shiftwidth=4    | 
-   \set expandtab       | 
-   \set autoindent      | 
+   \set tabstop=4       |
+   \set softtabstop=4   |
+   \set shiftwidth=4    |
+   \set expandtab       |
+   \set autoindent      |
    \set fileformat=unix
 autocmd FileType ms set wrap
 autocmd FileType ms nnoremap <Up> g<Up>
@@ -98,8 +98,20 @@ set shiftwidth=4
 set autoindent
 set smarttab
 set fileformat=unix
-"set expandtab
+set expandtab
 
+"=== vhdl section ===
+" utf-8 support
+au BufNewFile,BufRead *.vhd set encoding=utf-8
+
+" format
+au BufNewFile,BufRead *.vhd
+   \set tabstop=4       |
+   \set softtabstop=4   |
+   \set shiftwidth=4    |
+   \set expandtab       |
+   \set autoindent      |
+   \set fileformat=unix
 "=== python section ===
 " jupyter integration
 " Plugin 'jupyter-vim/jupyter-vim'
@@ -124,13 +136,13 @@ autocmd Filetype python map <silent> <F10> <Plug>(IPy-Terminate)
 au BufNewFile,BufRead *.py set encoding=utf-8
 
 " PEP8
-au BufNewFile,BufRead *.py 
-   \set tabstop=4       | 
-   \set softtabstop=4   | 
-   \set shiftwidth=4    | 
-   \set textwidth=79    | 
-   \set expandtab       | 
-   \set autoindent      | 
+au BufNewFile,BufRead *.py
+   \set tabstop=4       |
+   \set softtabstop=4   |
+   \set shiftwidth=4    |
+   \set textwidth=79    |
+   \set expandtab       |
+   \set autoindent      |
    \set fileformat=unix
 
 " Better indentation
@@ -152,7 +164,7 @@ autocmd FileType python set foldcolumn=1
 Plugin 'Valloric/YouCompleteMe'
 " Need to compile upon updates to their API:
 " cd ~/.vim/bundle/YouCompleteMe/
-" python3 install.py [--clang-completer] 
+" python3 install.py [--clang-completer]
 " # See README.md for more informations on the supported languages
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -205,13 +217,13 @@ syntax on
 Plugin 'scrooloose/nerdtree'
 nnoremap <C-n> :NERDTreeToggle<CR>
 " same for tabs
-Plugin 'jistr/vim-nerdtree-tabs' 
+Plugin 'jistr/vim-nerdtree-tabs'
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
 " Super Searching
 Plugin 'kien/ctrlp.vim'
 
-" Git integration 
+" Git integration
 Plugin 'tpope/vim-fugitive'
 
 " Powerline
@@ -241,7 +253,7 @@ endif
 
 " Async run
 Plugin 'skywind3000/asyncrun.vim'
-let g:asyncrun_status = "stopped" 
+let g:asyncrun_status = "stopped"
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 " Plugin 'hauleth/asyncdo.vim'
 let $PYTHONUNBUFFERED=1
