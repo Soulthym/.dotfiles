@@ -100,6 +100,8 @@ set smarttab
 set fileformat=unix
 set expandtab
 
+noremap <silent> <F9> <Esc>:!sh %<CR>
+
 "=== vhdl section ===
 " utf-8 support
 au BufNewFile,BufRead *.vhd set encoding=utf-8
