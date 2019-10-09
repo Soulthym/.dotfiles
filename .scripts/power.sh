@@ -239,15 +239,12 @@ read_all () {
         fi
     fi
     state=""
-    state="${state}cpu_min_perf\t${cpu_min_perf}"
-    state="${state}\ncpu_max_perf\t${cpu_max_perf}"
+    state="${state}cpu_min_perf\t${cpu_min_perf}%"
+    state="${state}\ncpu_max_perf\t${cpu_max_perf}%"
     state="${state}\ncpu_turbo\t${cpu_turbo}"
-    state="${state}\ngpu_min_freq\t${gpu_min_freq}"
-    state="${state}\ngpu_max_freq\t${gpu_max_freq}"
-    state="${state}\ngpu_min_limit\t${gpu_min_limit}"
-    state="${state}\ngpu_max_limit\t${gpu_max_limit}"
-    state="${state}\ngpu_boost_freq\t${gpu_boost_freq}"
-    state="${state}\ngpu_cur_freq\t${gpu_cur_freq}"
+    state="${state}\ngpu_min_freq\t${gpu_min_freq} MHz\t[min : ${gpu_min_limit}]\t[current : ${gpu_cur_freq}]"
+    state="${state}\ngpu_max_freq\t${gpu_max_freq} MHz\t[max : ${gpu_max_limit}]\t[current : ${gpu_cur_freq}]"
+    state="${state}\ngpu_boost_freq\t${gpu_boost_freq} MHz\t[max : ${gpu_max_limit}]"
     state="${state}\ncpu_governor\t${cpu_governor}"
     state="${state}\nenergy_perf\t${energy_perf}"
     if check_dell_thermal; then
@@ -262,82 +259,78 @@ read_all () {
     echo -e $state
 }
 
-input=$(read_all | rofi -dmenu | awk '{print $1}')
-case $input in
-    "cpu_min_perf")
-        set_cpu_min_perf
-        ;;
+main () {
+    input=$(read_all | rofi -dmenu | awk '{print $1}')
+    case $input in
+        "cpu_min_perf")
+            rofi -dmenu ""
+            set_cpu_min_perf
+            ;;
 
-    "cpu_max_perf")
-        set_cpu_max_perf
-        ;;
+        "cpu_max_perf")
+            set_cpu_max_perf
+            ;;
 
-    "cpu_turbo")
-        set_cpu_turbo
-        ;;
+        "cpu_turbo")
+            set_cpu_turbo
+            ;;
 
-    "gpu_min_freq")
-        set_gpu_min_freq
-        ;;
+        "gpu_min_freq")
+            set_gpu_min_freq
+            ;;
 
-    "gpu_max_freq")
-        set_gpu_max_freq
-        ;;
+        "gpu_max_freq")
+            set_gpu_max_freq
+            ;;
 
-#    "gpu_min_limit")
-#        set_gpu_min_limit //
-#        ;;
-#
-#    "gpu_max_limit")
-#        set_gpu_max_limit //
-#        ;;
-#
-    "gpu_boost_freq")
-        set_gpu_boost_freq 
-        ;;
+        "gpu_boost_freq")
+            set_gpu_boost_freq 
+            ;;
 
-#    "gpu_cur_freq")
-#        set_gpu_cur_freq //
-#        ;;
-#
-    "cpu_governor")
-        set_cpu_governor
-        ;;
+        "cpu_governor")
+            set_cpu_governor
+            ;;
 
-    "energy_perf")
-        set_energy_perf
-        ;;
+        "energy_perf")
+            set_energy_perf
+            ;;
 
-    "thermal_mode")
-        set_thermal_mode
-        ;;
+        "thermal_mode")
+            set_thermal_mode
+            ;;
 
-    "lg_battery_charge_limit")
-        set_lg_battery_charge_limit
-        ;;
+        "lg_battery_charge_limit")
+            set_lg_battery_charge_limit
+            ;;
 
-    "lg_usb_charge")
-        set_lg_usb_charge
-        ;;
+        "lg_usb_charge")
+            set_lg_usb_charge
+            ;;
 
-    "lg_fan_mode")
-        set_lg_fan_mode
-        ;;
-    *)
-        echo "Usage:"
-        echo "1: power.sh [ -cpu-min-perf |"
-        echo "                  -cpu-max-perf |"
-        echo "                  -cpu-turbo |"
-        echo "                  -gpu-min-freq |"
-        echo "                  -gpu-max-freq |"
-        echo "                  -gpu-boost-freq |"
-        echo "                  -cpu-governor |"
-        echo "                  -energy-perf |"
-        echo "                  -thermal-mode |"
-        echo "                  -lg-battery-charge-limit |"
-        echo "                  -lg-fan-mode |"
-        echo "                  -lg-usb-charge ] value"
-        echo "2: power.sh -read-all"
-        exit 3
-        ;;
-esac
+        "lg_fan_mode")
+            set_lg_fan_mode
+            ;;
+        *)
+            echo "Usage:"
+            echo "1: power.sh [ -cpu-min-perf |"
+            echo "                  -cpu-max-perf |"
+            echo "                  -cpu-turbo |"
+            echo "                  -gpu-min-freq |"
+            echo "                  -gpu-max-freq |"
+            echo "                  -gpu-boost-freq |"
+            echo "                  -cpu-governor |"
+            echo "                  -energy-perf |"
+            echo "                  -thermal-mode |"
+            echo "                  -lg-battery-charge-limit |"
+            echo "                  -lg-fan-mode |"
+            echo "                  -lg-usb-charge ] value"
+            echo "2: power.sh -read-all"
+            exit 3
+            ;;
+    esac
+}
+
+#main
+
+#read_all | rofi -dmenu
+read_all
