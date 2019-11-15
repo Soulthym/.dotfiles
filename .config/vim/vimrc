@@ -77,6 +77,9 @@ nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 Plugin 'Konfekt/FastFold'
 
+"=== Qt section ==
+Plugin 'fedorenchik/qt-support.vim'
+
 "=== groff-ms section ==
 au BufNewFile,BufRead *.ms
    \set tabstop=4       |
