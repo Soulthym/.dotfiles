@@ -85,6 +85,7 @@ alias p4="cd ~/code/PST/4/"
 alias ee="cd ~/code/PST/4/eureka-effect"
 alias 5a="cd ~/Documents/ESIEA/5A && ls"
 alias ic="vim ~/.config/i3/config"
+alias pf="cd ~/code/PFE/ && ls"
 
 alias inw="cd ~/inwibe"
 alias ci="~/inwibe/connect-prod.sh"
