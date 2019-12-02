@@ -119,8 +119,8 @@ alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 #neofetch
 
 #vim
-alias vim=nvim
-alias v=nvim
+#alias vim=nvim
+#alias v=nvim
 
 # https://gitea.tfnux.org/adraenwan/keychain-wrapper
 # persistent ssh-agent wrapper
