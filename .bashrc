@@ -84,8 +84,9 @@ alias tf="cd ~/code/python/3/tensorflow-tests/"
 alias p4="cd ~/code/PST/4/"
 alias ee="cd ~/code/PST/4/eureka-effect"
 alias 5a="cd ~/Documents/ESIEA/5A && ls"
-alias ic="vim ~/.config/i3/config"
 alias pf="cd ~/code/PFE/ && ls"
+alias p3="cd ~/code/python/3/ && ls"
+alias ic="vim ~/.config/i3/config"
 
 alias inw="cd ~/inwibe"
 alias ci="~/inwibe/connect-prod.sh"
@@ -119,8 +120,8 @@ alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 #neofetch
 
 #vim
-#alias vim=nvim
-#alias v=nvim
+alias vim=nvim
+alias v=nvim
 
 # https://gitea.tfnux.org/adraenwan/keychain-wrapper
 # persistent ssh-agent wrapper
