@@ -3,6 +3,7 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 call plug#begin('~/.config/vim/autorun/plugged')
+Plug 'https://github.com/vim-scripts/CycleColor.git'
 Plug 'https://github.com/Konfekt/FastFold.git'
 Plug 'https://github.com/fedorenchik/qt-support.vim.git'
 Plug 'https://github.com/bfredl/nvim-ipy.git'
@@ -155,7 +156,7 @@ let g:ipy_truncate_input = 2
 autocmd Filetype python map <silent> <F3> <Esc>:IPython<CR>
 autocmd Filetype python map <silent> <F4> <Plug>(IPy-Run)
 autocmd Filetype python map <silent> <F5> <Plug>(IPy-RunCell)
-" autocmd Filetype python map <silent> <F10> <Plug>(IPy-RunAll)
+autocmd Filetype python map <silent> <F6> <Plug>(IPy-RunAll)
 autocmd Filetype python imap <silent> <c-n> <Plug>(IPy-Complete)
 autocmd Filetype python map <silent> <F2> <Plug>(IPy-WordObjInfo)
 autocmd Filetype python map <silent> <F9> <Plug>(IPy-Interrupt)
