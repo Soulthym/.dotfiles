@@ -55,6 +55,8 @@ set splitbelow
 set number relativenumber
 set nowrap
 map <F10> :w! \| !./.compile.sh <c-r>%<CR>
+autocmd BufWritePre * :%s/\s\+$//e
+
 " Use 24-bit (true-color) mode in Vim/Neovim when outside tmux or screen.
 " If you're using tmux version 2.2 or later, you can remove the outermost $TMUX
 " check and use tmux's 24-bit color support
@@ -98,24 +100,20 @@ endfunction
 set foldtext=MyFoldText()
 set foldmethod=manual
 set viewoptions-=options
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 
-"=== Qt section ==
+"=== groff section ==
+autocmd BufWritePost *.roff !./.compile.sh %
 
 "=== groff-ms section ==
-au BufNewFile,BufRead *.ms
+autocmd BufNewFile,BufRead *.ms
    \set tabstop=4       |
    \set softtabstop=4   |
    \set shiftwidth=4    |
    \set expandtab       |
    \set autoindent      |
    \set fileformat=unix
-autocmd FileType ms set wrap
-autocmd FileType ms nnoremap <Up> g<Up>
-autocmd FileType ms nnoremap <Down> g<Down>
 " autocmd FileType ms nnoremap <buffer> <F5> <Esc>:w<CR>:!clear;groff -ms % -T pdf > out.pdf<CR>
 " autocmd Filetype ms noremap <F5> <Esc>:w! \| !compiler <c-r>%<CR>
 
@@ -132,17 +130,19 @@ noremap <silent> <F9> <Esc>:!sh %<CR>
 
 "=== vhdl section ===
 " utf-8 support
-au BufNewFile,BufRead *.vhd set encoding=utf-8
+autocmd BufNewFile,BufRead *.vhd set encoding=utf-8
 
 " format
-au BufNewFile,BufRead *.vhd
+autocmd BufNewFile,BufRead *.vhd
    \set tabstop=4       |
    \set softtabstop=4   |
    \set shiftwidth=4    |
    \set expandtab       |
    \set autoindent      |
    \set fileformat=unix
+
 "=== python section ===
+autocmd BufWritePost *.py !./.compile.sh %
 " jupyter integration
 " Plugin 'jupyter-vim/jupyter-vim'
 
@@ -163,10 +163,10 @@ autocmd Filetype python map <silent> <F9> <Plug>(IPy-Interrupt)
 autocmd Filetype python map <silent> <F12> <Plug>(IPy-Terminate)
 
 " utf-8 support
-au BufNewFile,BufRead *.py set encoding=utf-8
+autocmd BufNewFile,BufRead *.py set encoding=utf-8
 
 " PEP8
-au BufNewFile,BufRead *.py
+autocmd BufNewFile,BufRead *.py
    \set tabstop=4       |
    \set softtabstop=4   |
    \set shiftwidth=4    |
@@ -187,7 +187,7 @@ au BufNewFile,BufRead *.py
 autocmd FileType python set foldcolumn=1
 
 " Should flag trailing whitespaces
-"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+"autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 " Auto-complete
 " Plugin 'Valloric/YouCompleteMe'
@@ -202,7 +202,9 @@ autocmd FileType python set foldcolumn=1
 "" Syntax Checking
 "Plugin 'vim-syntastic/syntastic'
 
-" PEP8 Checking
+" python pretty
+let python_highlight_all=1
+syntax on
 
 " Color-Scheme
 if has('gui_running')
@@ -219,18 +221,10 @@ else
   "colorscheme zenburn
 endif
 
-" python pretty
-let python_highlight_all=1
-syntax on
-
 " File browsing
 nnoremap <C-n> :NERDTreeToggle<CR>
 " same for tabs
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-
-" Super Searching
-
-" Git integration
 
 " Powerline
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
