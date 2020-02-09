@@ -149,6 +149,20 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
+
+mode "tablet" {
+        bindsym Left  exec "xrandr -o 3"; exec "xinput set-prop $(xinput list | grep Wacom | grep stylus | sed -e 's/.*id=\([0-9]*\).*/\1/') --type=float 'Coordinate Transformation Matrix'   0  1  0 -1  0  1  0  0  1"
+        bindsym Up    exec "xrandr -o 0"; exec "xinput set-prop $(xinput list | grep Wacom | grep stylus | sed -e 's/.*id=\([0-9]*\).*/\1/') --type=float 'Coordinate Transformation Matrix'   0  0  0  0  0  0  0  0  0"
+        bindsym Down  exec "xrandr -o 2"; exec "xinput set-prop $(xinput list | grep Wacom | grep stylus | sed -e 's/.*id=\([0-9]*\).*/\1/') --type=float 'Coordinate Transformation Matrix'  -1  0  1  0 -1  1  0  0  1"
+        bindsym Right exec "xrandr -o 1"; exec "xinput set-prop $(xinput list | grep Wacom | grep stylus | sed -e 's/.*id=\([0-9]*\).*/\1/') --type=float 'Coordinate Transformation Matrix'   0 -1  1  1  0  0  0  0  1"
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+t mode "default"
+}
+bindsym $mod+t mode "tablet"
+
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
