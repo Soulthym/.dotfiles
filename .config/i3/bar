@@ -1,0 +1,9 @@
+define wifi
+    full_text:$(nmcli device status | grep " connected" | awk '{print $4}')
+    color: #0000ff
+define time
+    full_text: $(date --rfc-3339=seconds | sed -e 's/-/\//g' -e 's/+\(.*\)//g')
+    color: #ff00ff
+define battery
+    full_text:$(acpi | sed 's/.* \([0-9]\+%\).*/\1/g')
+    color: #ff0000
