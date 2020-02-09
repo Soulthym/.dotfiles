@@ -34,6 +34,11 @@ floating_modifier $mod
 #bindsym $mod+Return exec st /bin/bash
 bindsym $mod+Return exec konsole
 # i3-sensible-terminal
+# quick terminal
+exec --no-startup-id konsole -name metask
+for_window [instance="metask"] floating enable;
+for_window [instance="metask"] move scratchpad; [instance="metask"] scratchpad show; move position 0px 22px; resize shrink height 100px; resize grow width 683px; move scratchpad
+bindsym $mod+Shift+Return [instance="metask"] scratchpad show
 
 # kill focused window
 bindsym $mod+Shift+a kill
