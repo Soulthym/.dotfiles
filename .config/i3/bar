@@ -1,12 +1,12 @@
 define wifi
-    full_text: WIFI: $(nmcli device status | grep " connected" | awk '{print $4}')
-    color: #0000ff
+    full_text: WiFi: $(nmcli device status | grep " connected" | awk '{print $4}')
+    color: #2e2ed9
+define sound
+    full_text: Vol: $(amixer sget 'Master' | grep -e '%' | grep Left | sed 's/[^[]*\[\([0-9]\+%\)\].*/\1/g')
+    color: #d92e92
 define time
     full_text: $(date --rfc-3339=seconds | sed -e 's/-/\//g' -e 's/+\(.*\)//g')
-    color: #ff00ff
+    color: #92d92e
 define battery
-    full_text: BAT: $(acpi | sed 's/.* \([0-9]\+%\).*/\1/g')
-    color: #ff0000
-define sound
-    full_text: VOL: $(amixer sget 'Master' | grep -e '%' | grep Left | sed 's/[^[]*\[\([0-9]\+%\)\].*/\1/g')
-    color: #00ff00
+    full_text: Bat: $(acpi | sed 's/.* \([0-9]\+%\).*/\1/g')
+    color: $(case $(acpi|tr -d ','|awk '{print $3}') in 'Charging') echo '#20e0a0' ;; 'Discharging') echo '#ff9020' ;; 'Unknown') echo '#d9d92e' ;; esac)
