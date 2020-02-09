@@ -16,6 +16,13 @@ case $1 in
     -s|--set)
         new_value=$value
         ;;
+    -r|--read)
+        current_brightness=$(echo "$(cat $brightness_path/brightness)*100/$max" \
+            | bc \
+            | sed "s/\..*$//")
+        echo brightness:$current_brightness%
+        exit 0
+        ;;
     *)
         echo error
         exit -1
