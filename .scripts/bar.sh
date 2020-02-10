@@ -9,6 +9,9 @@ function module {
     done
     echo '}'
 }
+function separator {
+    echo -n ','
+}
 echo '{ "version": 1 } [ []'
 while :; do
     printf ',['
@@ -16,17 +19,17 @@ while :; do
         name="wifi"\
         full_text="WiFi:$(nmcli device status | grep ' connected' | awk '{print $4}')"\
         color="#2e2ed9"
-    echo -n ','
+    separator
     module\
         name="sound"\
         full_text="Vol: $(amixer sget 'Master' | grep -e '%' | grep Left | sed 's/[^[]*\[\([0-9]\+%\)\].*/\1/g')"\
         color="#d92e92"
-    echo -n ','
+    separator
     module\
         name="time"\
         full_text="$(date --rfc-3339=seconds | sed -e 's/-/\//g' -e 's/+\(.*\)//g')"\
         color="#92d92e"
-    echo -n ','
+    separator
     module\
         name=battery\
         full_text="Bat: $(acpi | sed 's/.* \([0-9]\+%\).*/\1/g')"\
