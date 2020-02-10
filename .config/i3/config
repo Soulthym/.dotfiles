@@ -223,7 +223,7 @@ hide_edge_borders smart
 bar {
     #output            LVDS1
     #i3bar_command   /home/soulthym/.config/i3/bar.sh
-    status_command    /home/soulthym/.config/i3/bar.sh
+    status_command    /home/soulthym/.scripts/bar.sh
     position          top
 #    mode              hide
     workspace_buttons yes
