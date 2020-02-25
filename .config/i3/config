@@ -35,6 +35,7 @@ floating_modifier $mod
 bindsym $mod+Return exec konsole
 # i3-sensible-terminal
 # quick terminal
+bindsym $mod+Shift+backslash exec --no-startup-id konsole -name metask
 exec --no-startup-id konsole -name metask
 for_window [instance="metask"] floating enable;
 for_window [instance="metask"] move scratchpad; [instance="metask"] scratchpad show; move position 0px 22px; resize shrink height 100px; resize grow width 683px; move scratchpad
@@ -223,6 +224,7 @@ hide_edge_borders smart
 bar {
     #output            LVDS1
     #i3bar_command   /home/soulthym/.config/i3/bar.sh
+    height 20
     status_command    /home/soulthym/.scripts/bar.sh
     position          top
 #    mode              hide
@@ -249,7 +251,7 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #i
 bindsym $mod+F9 exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym $mod+F8 exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym $mod+XF86AudioLowerVolume exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 bindsym $mod+F7 exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
@@ -279,3 +281,4 @@ exec_always feh --bg-scale ~/Pictures/Wallpaper/gRoot.jpg
 #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 exec compton --config .config/compton/compton.conf
+gaps inner 2
