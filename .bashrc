@@ -125,20 +125,24 @@ alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 #neofetch
 
 #vim
-alias vim=nvim
-alias v=nvim
-
-# https://gitea.tfnux.org/adraenwan/keychain-wrapper
-# persistent ssh-agent wrapper
-eval $(keychain --eval --quiet --timeout 10)
-# Add these lines to your ssh_config (for example, ~/.ssh/config):
-#
-# "# when key is not loaded in ssh-agent"
-# "# ask for passphrase and forward it to ssh-agent"
-# "AddKeysToAgent yes"
+alias evim='vim -u "$HOME"/.config/vim/embedded.vim --not-a-term'
+alias nv=nvim
 
 PATH="$(du $HOME/.local/bin/ | cut -f2 | tr '\n' ':')$PATH"
 export PATH=$PATH:$HOME/.scripts/
 shopt -s globstar
 
 export QSYS_ROOTDIR="/home/soulthym/.cache/yay/quartus-free/pkg/quartus-free/opt/altera/19.1/quartus/sopc_builder/bin"
+
+# https://gitea.tfnux.org/adraenwan/keychain-wrapper
+# persistent ssh-agent wrapper
+eval $(keychain --eval --quiet)
+ssh-add $(for f in ~/.ssh/*.pub; do echo ${f%\.pub}; done) > /dev/null 2>&1
+alias ssh-login='ssh-add $(for f in ~/.ssh/*.pub; do echo ${f%\.pub}; done) > /dev/null 2>&1'
+alias sl='ssh-add $(for f in ~/.ssh/*.pub; do echo ${f%\.pub}; done) > /dev/null 2>&1'
+# Add these lines to your ssh_config (for example, ~/.ssh/config):
+#
+# "# when key is not loaded in ssh-agent"
+# "# ask for passphrase and forward it to ssh-agent"
+# "AddKeysToAgent yes"
+
