@@ -293,7 +293,7 @@ bindsym $mod+u exec ~/.scripts/emoji
 bindsym $mod+c exec ~/.scripts/special-chars
 
 #using Vim as stdin
-bindsym Mod1+Return exec --no-startup-id ~/.scripts/vim-filler.sh vimfiller
+bindsym Mod1+Return exec --no-startup-id ~/.scripts/vim-filler vimfiller
 for_window [instance="vimfiller"] floating enable
 for_window [instance="vimfiller"] resize set 30 ppt 20 ppt
 for_window [instance="vimfiller"] move position center center
