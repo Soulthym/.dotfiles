@@ -1,0 +1,11 @@
+#!/bin/bash
+
+name=${1:-vimfiller}
+f=$(mktemp) && \
+konsole \
+    --nofork \
+    -name $name \
+    -e "vim \"$f\"" \
+    && \
+content=$(cat "$f")
+xdotool type "$content"
