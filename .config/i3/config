@@ -156,6 +156,15 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 
+mode "sound" {
+    bindsym Up exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+    bindsym Down exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+Shift+s mode "default"
+}
+bindsym $mod+Shift+s mode "sound"
+
 mode "tablet" {
         bindsym Left  exec "xrandr -o 3"; exec "xinput set-prop $(xinput list | grep Wacom | grep stylus | sed -e 's/.*id=\([0-9]*\).*/\1/') --type=float 'Coordinate Transformation Matrix'   0  1  0 -1  0  1  0  0  1"
         bindsym Up    exec "xrandr -o 0"; exec "xinput set-prop $(xinput list | grep Wacom | grep stylus | sed -e 's/.*id=\([0-9]*\).*/\1/') --type=float 'Coordinate Transformation Matrix'   0  0  0  0  0  0  0  0  0"
