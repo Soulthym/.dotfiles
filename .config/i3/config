@@ -17,7 +17,7 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 12, Awesome 12
+font pango:DejaVu Sans Mono 12, Noto 12, Awesome 12
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -34,12 +34,17 @@ floating_modifier $mod
 #bindsym $mod+Return exec st /bin/bash
 bindsym $mod+Return exec konsole
 # i3-sensible-terminal
-# quick terminal
-bindsym $mod+Shift+backslash exec --no-startup-id konsole -name metask
-exec --no-startup-id konsole -name metask
-for_window [instance="metask"] floating enable;
-for_window [instance="metask"] move scratchpad; [instance="metask"] scratchpad show; move position 0px 22px; resize shrink height 100px; resize grow width 683px; move scratchpad
-bindsym $mod+Shift+Return [instance="metask"] scratchpad show
+# dropdown terminal
+bindsym $mod+Shift+backslash exec --no-startup-id konsole -name dropdown
+exec --no-startup-id konsole -name dropdown
+for_window [instance="dropdown"] floating enable;
+for_window [instance="dropdown"] move scratchpad;
+for_window [instance="dropdown"] scratchpad show;
+for_window [instance="dropdown"] resize set 70 ppt 45 ppt;
+for_window [instance="dropdown"] move position center center
+for_window [instance="dropdown"] move scratchpad
+
+bindsym $mod+Shift+Return [instance="dropdown"] scratchpad show
 
 # kill focused window
 bindsym $mod+Shift+a kill
