@@ -307,7 +307,10 @@ bindsym $mod+d exec rofi -show run -config ~/.config/rofi/themes/sidebar.rasi #w
 ######################
 
 # Selfmade startup scripts
-exec_always feh --bg-scale ~/Pictures/Wallpaper/gRoot.jpg
+exec --no-startup-id xkbcomp ~/.config/xkbcomp/setup.xkb #Custom layout (swapped ESC and CAPS)
+exec --no-startup-id /usr/lib/kdeconnectd
+exec --no-startup-id /bin/dunst -shrink
+exec feh --bg-scale ~/Pictures/Wallpaper/gRoot.jpg
 #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 exec compton --config .config/compton/compton.conf
