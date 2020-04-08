@@ -1,5 +1,7 @@
 #shopt -s promptvars dotglob histappend no_empty_cmd_completion cdspell xpg_echo
- 
+y() {
+    cat | xclip -selection clipboard;}
+p() { xclip -selection clipboard -o;}
 function parse_git_dirty {
   echo -n $(git status 2>/dev/null | awk  '
 BEGIN {
@@ -86,10 +88,13 @@ alias ee="cd ~/code/PST/4/eureka-effect"
 alias 5a="cd ~/Documents/ESIEA/5A && ls"
 alias pf="cd ~/code/PFE/ && ls"
 alias p3="cd ~/code/python/3/ && ls"
+alias pc="cd ~/code/python/3/discord-bot-principal-PC/ && ls"
 alias ic="vim ~/.config/i3/config"
-
 alias inw="cd ~/inwibe"
 alias ci="~/inwibe/connect-prod.sh"
+alias "ys=xclip -selection clipboard"
+alias "vs=xclip -o -selection clipboard"
+alias "yc=history 2| head -2|head -1|sed 's/^ *[0-9]\+ *\(.*\)/\1/g' | tr -d '\n'|xclip -sel clip"
 
 alias com="git commit -m"
 alias push="git push"
