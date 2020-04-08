@@ -17,17 +17,17 @@ while :; do
     printf ',['
     module\
         name="free_memory"\
-        full_text="$(free -w | awk 'BEGIN{i=0;s=""}{i=i+1;if (i>1) s=s$4"/"$2"*100,"}END{print s}' |sed -e 's/,/\n/g'|bc -l |sed -e 's/\([0-9]\+\)\..*/\1%/' |awk 'BEGIN{i=0}{if (i==0) printf "Mem: R:"$0"|C:"; else printf $0; i=i+1}')"\
+        full_text="$(free -w | awk '/Mem|Swap/{print $1 int(100-($4/$2*100))"%"}'|paste -sd '|' -)"\
         color="#d9922e"
     separator
     module\
         name="SSD Space"\
-        full_text="$(df -h | awk '/mapper/{print $6 ": " $5 "|"}' | tr -d '\n' | sed 's/|$//')"\
+        full_text="$(df -h | awk '/mapper/{print $6 ": " $5}'| paste -sd '|')"\
         color="#d92e92"
     separator
     module\
         name="wifi"\
-        full_text="WiFi:$(nmcli device status | grep ' connected' | awk '{print $4}')"\
+        full_text="WiFi:$(nmcli device status | awk '/ connected/{print $4}'| paste -sd "|" -)"\
         color="#2e2ed9"
     separator
     module\
@@ -37,7 +37,7 @@ while :; do
     separator
     module\
         name="time"\
-        full_text="$(date --rfc-3339=seconds | sed -e 's/-/\//g' -e 's/+\(.*\)//g')"\
+        full_text="$(date -R |awk '{print gensub(/,/," ",1,$1)$2" "$3" "$4" "$5}')"\
         color="#92d92e"
     separator
     module\
