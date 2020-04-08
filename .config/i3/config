@@ -288,6 +288,7 @@ bindsym --release Print exec "scrot -m ~/Images/screenshots/%s_%H%M_%d.%m.%Y_$wx
 bindsym --release Shift+Print exec "scrot -s ~/Images/screenshots/%s_%H%M_%d%m%Y_$wx$h.png"
 bindsym --release $mod+Shift+Print exec "scrot -u -d 4 ~/Images/screenshots/%s_%H%M_%d%m%Y_$wx$h.png"
 
+bindsym $mod+Shift+m exec ~/.scripts/moarRAM.sh
 bindsym $mod+u exec ~/.scripts/emoji
 bindsym $mod+c exec ~/.scripts/special-chars
 bindsym $mod+d exec rofi -show run -config ~/.config/rofi/themes/one-dark.rasi
