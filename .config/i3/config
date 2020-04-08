@@ -291,7 +291,21 @@ bindsym --release $mod+Shift+Print exec "scrot -u -d 4 ~/Images/screenshots/%s_%
 bindsym $mod+Shift+m exec ~/.scripts/moarRAM.sh
 bindsym $mod+u exec ~/.scripts/emoji
 bindsym $mod+c exec ~/.scripts/special-chars
-bindsym $mod+d exec rofi -show run -config ~/.config/rofi/themes/one-dark.rasi
+
+#using Vim as stdin
+bindsym Mod1+Return exec --no-startup-id ~/.scripts/vim-filler.sh vimfiller
+for_window [instance="vimfiller"] floating enable
+for_window [instance="vimfiller"] resize set 30 ppt 20 ppt
+for_window [instance="vimfiller"] move position center center
+
+######################
+#    ROFI--THEMES    #
+######################
+#bindsym $mod+d exec rofi -show run -config ~/.config/rofi/themes/one-dark.rasi #current
+#bindsym $mod+d exec rofi -show run -config ~/.config/rofi/themes/Pop-Dark.rasi #why not
+bindsym $mod+d exec rofi -show run -config ~/.config/rofi/themes/sidebar.rasi #why not
+######################
+
 # Selfmade startup scripts
 exec_always feh --bg-scale ~/Pictures/Wallpaper/gRoot.jpg
 #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
