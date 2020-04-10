@@ -8,4 +8,4 @@ konsole \
     -e "vim \"$f\"" \
     && \
 content=$(cat "$f")
-xdotool type "$content"
+xdotool type --delay 0 "$content"
