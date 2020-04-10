@@ -1,0 +1,11 @@
+#! /bin/bash
+cmd=${1:-ipython}
+port=${2:-3000}
+adrs=${3:-localhost}
+
+coproc CMD {
+    $cmd
+}&
+nc -l $adrs $port <&"${CMD[0]}" >&"${CMD[1]}"
+
+kill "$CMD_PID"
