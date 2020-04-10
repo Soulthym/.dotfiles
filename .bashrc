@@ -68,7 +68,8 @@ function custom_prompt {
 		fi
 		PS1+="$_green)"
 	fi
-	PS1+="$_white\$"
+        PS1+="\n"
+	PS1+="$_white↪"
 	PS1+="$_reset "
 }
 PROMPT_COMMAND='custom_prompt'
@@ -145,4 +146,3 @@ alias sl='ssh-add $(for f in ~/.ssh/*.pub; do echo ${f%\.pub}; done) > /dev/null
 # "# when key is not loaded in ssh-agent"
 # "# ask for passphrase and forward it to ssh-agent"
 # "AddKeysToAgent yes"
-
