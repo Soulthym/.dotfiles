@@ -27,6 +27,7 @@ set hlsearch
 nnoremap <silent> <BS> :nohlsearch<Bar>:echo<CR>
 
 set background=dark
+colorscheme pablo
 set relativenumber
 set number
 set fileformat=unix
