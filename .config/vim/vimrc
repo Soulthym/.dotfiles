@@ -54,4 +54,4 @@ nnoremap <silent> [<Space> :<C-u>put!=repeat(nr2char(10),v:count)<Bar>execute "'
 "unlet b:current_syntax
 "syntax include @Python syntax/python.vim
 "syntax region pythonCode  start=+<Python>+ keepend end=+/</Python>+  contains=@Python
-
+nnoremap Q A
