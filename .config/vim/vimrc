@@ -1,6 +1,6 @@
 set nocompatible            "Sweet VIM features
 set shell=/bin/bash         "if using a non POSIX Compliant shell
-set shell=/bin/bash         "if using a non POSIX Compliant shell
+
 syntax on                   "Syntax highlighting
 filetype plugin on
 
