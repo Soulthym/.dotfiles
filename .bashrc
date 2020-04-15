@@ -1,7 +1,13 @@
 #shopt -s promptvars dotglob histappend no_empty_cmd_completion cdspell xpg_echo
-y() {
-    cat | xclip -selection clipboard;}
-p() { xclip -selection clipboard -o;}
+man() {
+    LESS_TERMCAP_md=$'\e[01;31m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[01;44;33m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[01;32m' \
+    command man "$@"
+}
 function parse_git_dirty {
   echo -n $(git status 2>/dev/null | awk  '
 BEGIN {
@@ -69,7 +75,7 @@ function custom_prompt {
 		PS1+="$_green)"
 	fi
         PS1+="\n"
-	PS1+="$_white↪"
+	PS1+="$_white>"
 	PS1+="$_reset "
 }
 PROMPT_COMMAND='custom_prompt'
