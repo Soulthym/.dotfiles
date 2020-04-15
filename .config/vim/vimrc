@@ -21,9 +21,20 @@ endif
 call plug#begin('~/.config/vim/autorun/plugged')
 Plug 'soulthym/vim-focus-buffer'
 Plug 'baskerville/vim-sxhkdrc'
+Plug 'flazz/vim-colorschemes'
 call plug#end()
 
-au! bufwritepost *.vim,vimrc source %
+set background=dark
+colorscheme cobalt
+"colorscheme default
+"set background=light
+hi Normal ctermbg=235
+hi Folded ctermbg=NONE ctermfg=6 cterm=NONE
+"hi Normal ctermbg=NONE
+"hi LineNr ctermbg=NONE 
+
+au! bufwritepost *.vim,vimrc 
+            \ source $MYVIMRC
 
 set wildmenu                    "helps with tab-completion
 set nowrap                      "no line wraping
@@ -40,11 +51,10 @@ set smarttab
 set hlsearch
 nnoremap <silent> <BS> :nohlsearch<Bar>:echo<CR>
 
-set background=dark
-colorscheme pablo
 set relativenumber
 set number
 set fileformat=unix
+set modeline " file specific tweeks
 "X11 - Clipboard support (requires gvim instead of vim package under arch linux for the +clipboard compile option)
 "zy zY zp and zP aren't mapped by default, perfect for actuall clipboard interactions!
 nnoremap zy "+y
