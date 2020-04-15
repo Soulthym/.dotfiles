@@ -1,3 +1,6 @@
+" This comes from this amazing comment on StackOverflow,
+" from Peter Rincker (March 19th, 2018):
+" https://stackoverflow.com/a/49366558/10264886
 augroup send_to_term
   autocmd!
   autocmd TerminalOpen * if &buftype ==# 'terminal' |
