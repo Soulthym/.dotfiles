@@ -4,6 +4,20 @@ set shell=/bin/bash         "if using a non POSIX Compliant shell
 syntax on                   "Syntax highlighting
 filetype plugin on
 
+" Put plugins and dictionaries in this dir (also on Windows)
+let vimDir = '$HOME/.config/vim'
+let &runtimepath.=','.vimDir
+
+" undo history
+if has('persistent_undo')
+    let myUndoDir = expand(vimDir . '/.undodir')
+    " Create dirs
+    call system('mkdir ' . vimDir)
+    call system('mkdir ' . myUndoDir)
+    let &undodir = myUndoDir
+    set undofile
+endif
+
 call plug#begin('~/.config/vim/autorun/plugged')
 Plug 'soulthym/vim-focus-buffer'
 Plug 'baskerville/vim-sxhkdrc'
