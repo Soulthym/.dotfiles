@@ -40,7 +40,7 @@ au! bufwritepost *.vim,vimrc
             \ source $MYVIMRC
 
 set wildmenu                    "helps with tab-completion
-set wildmode=longest:full
+set wildmode=longest:full,full
 set nowrap                      "no line wraping
 set omnifunc=syntaxcomplete#Complete
 
