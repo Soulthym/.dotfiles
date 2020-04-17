@@ -32,8 +32,12 @@ endfunction
 function! s:send_to_term(keys)
   let bufnr = get(t:, 'send_to_term', 0)
   if bufnr > 0 && bufexists(bufnr) && getbufvar(bufnr, '&buftype') ==# 'terminal'
-    let keys = substitute(a:keys, '\n$', '', '')
-    call term_sendkeys(bufnr, keys . "\<cr>")
+    let keys = substitute(a:keys, '\n\+$', '', '')
+    let endc = "\<cr>"
+    if match(keys, '.*\n \+[^ ][^\n]*$') != -1
+        let endc = endc . "\<cr>"
+    endif
+    call term_sendkeys(bufnr, keys . endc)
     echo "Sent " . len(keys) . " chars -> " . bufname(bufnr)
   else
     echom "Error: No terminal"
