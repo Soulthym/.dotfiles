@@ -85,13 +85,14 @@ nnoremap <silent> [<Space> :<C-u>put!=repeat(nr2char(10),v:count)<Bar>execute "'
 nnoremap Q A
 
 " Running code in a terminal window:
-nmap <leader>p :botright vertical terminal python<cr>
+nmap <leader>p :botright vertical terminal ipython --no-autoindent<cr>
 " Run a line
 nmap <leader>l <Plug>(send-to-term-line)
 " Run a <motion>
 nmap <leader>r <Plug>(send-to-term)
 " Run a visual selection
 xmap <leader>r <Plug>(send-to-term)
+nmap <leader><leader> mrvap<Plug>(send-to-term)`r
 
 "Python syntax
 let g:python_version_2 = 0
