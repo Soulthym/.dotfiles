@@ -81,8 +81,8 @@ function custom_prompt {
 PROMPT_COMMAND='custom_prompt'
 shopt -s autocd
 
-export VISUAL="nvim"
-export EDITOR="nvim"
+export VISUAL="vim"
+export EDITOR="vim"
 export HISTSIZE=-1
 export HISTFILESIZE=-1
 # eval `dircolors ~/.dircolors`
@@ -97,7 +97,7 @@ alias pf="cd ~/code/PFE/ && ls"
 alias p3="cd ~/code/python/3/ && ls"
 alias pc="cd ~/code/python/3/discord-bot-principal-PC/ && ls"
 alias ic="vim ~/.config/i3/config"
-alias vc="vim ~/.config/vim/vimrc"
+alias vc="cd ~/.config/vim/ && vim ."
 alias inw="cd ~/inwibe"
 alias ci="~/inwibe/connect-prod.sh"
 alias "ys=xclip -selection clipboard"
@@ -137,7 +137,8 @@ alias evim='vim -u "$HOME"/.config/vim/embedded.vim --not-a-term'
 alias nv=nvim
 
 PATH="$(du $HOME/.local/bin/ | cut -f2 | tr '\n' ':')$PATH"
-export PATH=$PATH:$HOME/.scripts/
+export PATH="${PATH}:${HOME}/.scripts/"
+export PATH="${PATH}:${HOME}/.local/bin/"
 shopt -s globstar
 
 export QSYS_ROOTDIR="/home/soulthym/.cache/yay/quartus-free/pkg/quartus-free/opt/altera/19.1/quartus/sopc_builder/bin"
