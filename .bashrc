@@ -86,6 +86,7 @@ export EDITOR="vim"
 export HISTSIZE=-1
 export HISTFILESIZE=-1
 # eval `dircolors ~/.dircolors`
+alias brc="vim ~/.bahsrc"
 alias ls="ls --color=auto"
 alias la="ls -lah"
 alias ll="ls -l"
@@ -123,6 +124,7 @@ alias co="cd ~/code/"
 ### DOTFILES ###
 # init your repo with:
 #       git init --bare $HOME/.dotfiles
+alias d='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 #       source .bashrc
 #       dotf config --local status.showUntrackedFiles no
@@ -130,7 +132,6 @@ alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 #       dotf add <whatever file name>
 #       dotf commit -m <whatever message commit>
 #       dotf push
-#neofetch
 
 #vim
 alias evim='vim -u "$HOME"/.config/vim/embedded.vim --not-a-term'
