@@ -70,6 +70,8 @@ if has ('autocmd') " Remain compatible with earlier versions
         nmap <leader>p :botright vertical terminal ipython --no-autoindent<cr>
     augroup END
     augroup markdown
+        autocmd!
+        autocmd TextChanged,InsertLeave *.md call TabFormat()
         xmap <leader>T ypVr=
         xmap <leader>t ypVr-
     augroup END
