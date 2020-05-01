@@ -10,6 +10,7 @@ git init --bare $HOME/.dotfiles
 dotf config --local status.showUntrackedFiles no  
 dotf remote add origin https://github.com/Soulthym/.dotfiles.git  
 dotf pull origin x200t  
+dotf branch x200t  
 dotf branch --set-upstream-to=origin/x200t x200t  
 ```
 Put this in your shell's rc, for example in ~/.bashrc I have:  
