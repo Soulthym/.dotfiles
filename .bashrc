@@ -83,6 +83,7 @@ shopt -s autocd
 
 export VISUAL="vim"
 export EDITOR="vim"
+export HISTCONTROL=ignoreboth
 export HISTSIZE=-1
 export HISTFILESIZE=-1
 # eval `dircolors ~/.dircolors`
