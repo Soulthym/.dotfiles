@@ -8,6 +8,21 @@ filetype plugin on
 let vimDir = '$HOME/.config/vim'
 let &runtimepath.=','.vimDir
 
+call plug#begin('~/.config/vim/autorun/plugged')
+    "Plug 'flazz/vim-colorschemes'
+    "Plug 'rafi/awesome-vim-colorschemes'
+    "Plug 'vim-python/python-syntax'
+    "Plug 'dylanaraps/wal.vim'
+    Plug 'airblade/vim-gitgutter'
+    Plug 'soulthym/vim-focus-buffer'
+    Plug 'baskerville/vim-sxhkdrc'
+    Plug 'mhartington/oceanic-next'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+    " TODO: set colors for semantic highlighting
+    Plug 'jaxbot/semantic-highlight.vim'
+    Plug 'ajutsushi/tagbar'
+call plug#end()
+
 " undo history
 if has('persistent_undo')
     let myUndoDir = expand(vimDir . '/.undodir')
@@ -17,17 +32,6 @@ if has('persistent_undo')
     let &undodir = myUndoDir
     set undofile
 endif
-
-call plug#begin('~/.config/vim/autorun/plugged')
-Plug 'soulthym/vim-focus-buffer'
-Plug 'baskerville/vim-sxhkdrc'
-"Plug 'flazz/vim-colorschemes'
-"Plug 'rafi/awesome-vim-colorschemes'
-Plug 'mhartington/oceanic-next'
-"Plug 'vim-python/python-syntax'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-"Plug 'dylanaraps/wal.vim'
-call plug#end()
 
 let g:mkdp_browser = 'firefox'
 
@@ -113,6 +117,13 @@ if has ('autocmd') " Remain compatible with earlier versions
         nmap <leader><leader> mrvap<Plug>(send-to-term)`r
         " Visual inner column [https://stackoverflow.com/a/54686136/10264886]
         nnoremap vic <C-v>iWmw{joO`woOmwoO}koO`w
+        " Git-gutter
+        " remap Ctrl-G to an unused key, see `:help normal-index`, here I chose Ctrl-K
+        nnoremap <c-k> <c-g>
+        " remap Ctrl-G for Toggling git-gutter
+        nnoremap <c-g> :GitGutterToggle<cr>
+        nnoremap <Leader>s :SemanticHighlightToggle<cr>
+        nnoremap <Leader>] :TagbarToggle<cr>
     augroup END
 endif " has autocmd
 set wildmenu                    "helps with tab-completion
