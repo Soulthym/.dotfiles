@@ -202,6 +202,13 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 bindsym $mod+r mode "resize"
+#second monitor
+mode "monitor" {
+    bindsym l move workspace to output left
+    bindsym h move workspace to output right
+    bindsym Escape mode "default"
+}
+bindsym $mod+o mode "monitor"
 
 # Selfmade Colors
 set $bg-color 	         #2f343f
