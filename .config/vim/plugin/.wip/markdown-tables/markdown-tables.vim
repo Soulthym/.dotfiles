@@ -49,4 +49,3 @@ function! TabFormat() "TODO: extract the line format function from this code to 
 endfunction
 
 nmap <leader>t :call TabFormat()<cr>
-nmap <leader><leader> :s/ //g<cr>

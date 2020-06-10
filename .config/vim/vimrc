@@ -75,7 +75,7 @@ if has ('autocmd') " Remain compatible with earlier versions
     augroup END
     augroup markdown
         autocmd!
-        autocmd TextChanged,InsertLeave *.md call TabFormat()
+        "autocmd TextChanged,InsertLeave *.md call TabFormat()
         xmap <leader>T ypVr=
         xmap <leader>t ypVr-
     augroup END
@@ -113,8 +113,10 @@ if has ('autocmd') " Remain compatible with earlier versions
         nmap <leader>r <Plug>(send-to-term)
         " Run a visual selection
         xmap <leader>r <Plug>(send-to-term)
+        " Run the current file
+        nnoremap <leader><leader> mlgg\rG`m
         " Run a paragraph easily
-        nmap <leader><leader> mrvap<Plug>(send-to-term)`r
+        " nmap <leader><leader> mrvap<Plug>(send-to-term)`r
         " Visual inner column [https://stackoverflow.com/a/54686136/10264886]
         nnoremap vic <C-v>iWmw{joO`woOmwoO}koO`w
         " Git-gutter
