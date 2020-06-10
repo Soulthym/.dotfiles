@@ -232,7 +232,7 @@ bindsym --release $mod+Shift+Print exec "scrot -u -d 4 ~/Images/screenshots/%s_%
 
 bindsym $mod+d exec rofi -show run -config ~/.config/rofi/themes/one-dark.rasi
 # Selfmade startup scripts
-exec_always feh --bg-scale ~/Pictures/Wallpaper/gRoot.jpg
+exec_always feh --bg-scale ~/Images/wallpapers/gROOT.jpg
 #exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 exec compton --config .config/compton/compton.conf
@@ -245,7 +245,7 @@ exec_always device=$(xinput|grep Touchpad|cut -f2|cut -d= -f2);prop=$(xinput lis
 # I3 + KDE integration
 #exec --no-startup-id plasmashell
 #exec_always --no-startup-id wmctrl -c Plasma
-for_window [title="Desktop — Plasma"] kill; floating enable; border none
+for_window [title="Bureau — Plasma"] kill; floating enable; border none
 force_display_urgency_hint 0 ms
 focus_on_window_activation urgent
 

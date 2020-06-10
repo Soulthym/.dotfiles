@@ -114,11 +114,6 @@ alias dotf='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 #       dotf add <whatever file name>
 #       dotf commit -m <whatever message commit>
 #       dotf push
-<<<<<<< HEAD
-#neofetch
-||||||| merged common ancestors
-neofetch
-=======
 #neofetch
 
 #vim
@@ -133,13 +128,10 @@ eval $(keychain --eval --quiet --timeout 10)
 # "# when key is not loaded in ssh-agent"
 # "# ask for passphrase and forward it to ssh-agent"
 # "AddKeysToAgent yes"
->>>>>>> origin/xps13
 
-export QSYS_ROOTDIR="/home/soulthym/.cache/yay/quartus-free/pkg/quartus-free/opt/altera/18.1/quartus/sopc_builder/bin"
-<<<<<<< HEAD
+export QSYS_ROOTDIR="/home/soulthym/.cache/yay/quartus-free/pkg/quartus-free/opt/altera/19.1/quartus/sopc_builder/bin"
 shopt -s globstar
-||||||| merged common ancestors
-=======
 PATH="$(du $HOME/.local/bin/ | cut -f2 | tr '\n' ':')$PATH"
 export PATH=$PATH:$HOME/.scripts/
->>>>>>> origin/xps13
+
+complete -C /usr/bin/terraform terraform
