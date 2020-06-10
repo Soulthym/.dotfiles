@@ -78,11 +78,14 @@ export HISTSIZE=-1
 export HISTFILESIZE=-1
 # eval `dircolors ~/.dircolors`
 alias ls="ls --color=auto"
-alias la="ls -la"
-alias l="ls -l"
+alias la="ls -lah"
+alias ll="ls -l"
 alias tf="cd ~/code/python/3/tensorflow-tests/"
 alias p4="cd ~/code/PST/4/"
 alias ee="cd ~/code/PST/4/eureka-effect"
+alias 5a="cd ~/Documents/ESIEA/5A && ls"
+alias pf="cd ~/code/PFE/ && ls"
+alias p3="cd ~/code/python/3/ && ls"
 alias ic="vim ~/.config/i3/config"
 
 alias inw="cd ~/inwibe"

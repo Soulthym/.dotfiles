@@ -208,77 +208,77 @@ read_dell_thermal_mode () {
 }
 
 read_all () {
-cpu_min_perf=`cat $CPU_MIN_PERF`
-cpu_max_perf=`cat $CPU_MAX_PERF`
-cpu_turbo=`cat $CPU_TURBO`
-if [ "$cpu_turbo" == "1" ]; then
-    cpu_turbo="false"
-else
-    cpu_turbo="true"
-fi
-gpu_min_freq=`cat $GPU_MIN_FREQ`
-gpu_max_freq=`cat $GPU_MAX_FREQ`
-gpu_min_limit=`cat $GPU_MIN_LIMIT`
-gpu_max_limit=`cat $GPU_MAX_LIMIT`
-gpu_boost_freq=`cat $GPU_BOOST_FREQ`
-gpu_cur_freq=`cat $GPU_CUR_FREQ`
-cpu_governor=`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`
-energy_perf=`cat /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference`
-if [ -z "$energy_perf" ]; then
-    energy_perf=`x86_energy_perf_policy -r 2>/dev/null | grep -v 'HWP_' | \
-    sed -r 's/://;
-            s/(0x0000000000000000|EPB 0)/performance/;
-            s/(0x0000000000000004|EPB 4)/balance_performance/;
-            s/(0x0000000000000006|EPB 6)/default/;
-            s/(0x0000000000000008|EPB 8)/balance_power/;
-            s/(0x000000000000000f|EPB 15)/power/' | \
-    awk '{ printf "%s\n", $2; }' | head -n 1`
-fi
-if check_dell_thermal; then
-    thermal_mode=`smbios-thermal-ctl -g | grep -C 1 "Current Thermal Modes:"  | tail -n 1 | awk '{$1=$1;print}' | sed "s/\t//g" | sed "s/ /-/g" | tr "[A-Z]" "[a-z]" `
-fi
-if check_lg_drivers; then
-    lg_battery_charge_limit=`cat $LG_BATTERY_CHARGE_LIMIT`
-    if [ "$lg_battery_charge_limit" == "80" ]; then
-        lg_battery_charge_limit="true"
+    cpu_min_perf=`cat $CPU_MIN_PERF`
+    cpu_max_perf=`cat $CPU_MAX_PERF`
+    cpu_turbo=`cat $CPU_TURBO`
+    if [ "$cpu_turbo" == "1" ]; then
+        cpu_turbo="false"
     else
-        lg_battery_charge_limit="false"
+        cpu_turbo="true"
     fi
-    lg_usb_charge=`cat $LG_USB_CHARGE`
-    if [ "$lg_usb_charge" == "1" ]; then
-        lg_usb_charge="true"
-    else
-        lg_usb_charge="false"
+    gpu_min_freq=`cat $GPU_MIN_FREQ`
+    gpu_max_freq=`cat $GPU_MAX_FREQ`
+    gpu_min_limit=`cat $GPU_MIN_LIMIT`
+    gpu_max_limit=`cat $GPU_MAX_LIMIT`
+    gpu_boost_freq=`cat $GPU_BOOST_FREQ`
+    gpu_cur_freq=`cat $GPU_CUR_FREQ`
+    cpu_governor=`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor`
+    energy_perf=`cat /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference`
+    if [ -z "$energy_perf" ]; then
+        energy_perf=`x86_energy_perf_policy -r 2>/dev/null | grep -v 'HWP_' | \
+        sed -r 's/://;
+                s/(0x0000000000000000|EPB 0)/performance/;
+                s/(0x0000000000000004|EPB 4)/balance_performance/;
+                s/(0x0000000000000006|EPB 6)/default/;
+                s/(0x0000000000000008|EPB 8)/balance_power/;
+                s/(0x000000000000000f|EPB 15)/power/' | \
+        awk '{ printf "%s\n", $2; }' | head -n 1`
     fi
-    lg_fan_mode=`cat $LG_FAN_MODE`
-    if [ "$lg_fan_mode" == "1" ]; then
-        lg_fan_mode="false"
-    else
-        lg_fan_mode="true"
+    if check_dell_thermal; then
+        thermal_mode=`smbios-thermal-ctl -g | grep -C 1 "Current Thermal Modes:"  | tail -n 1 | awk '{$1=$1;print}' | sed "s/\t//g" | sed "s/ /-/g" | tr "[A-Z]" "[a-z]" `
     fi
-fi
-json="{"
-json="${json}\"cpu_min_perf\":\"${cpu_min_perf}\""
-json="${json},\"cpu_max_perf\":\"${cpu_max_perf}\""
-json="${json},\"cpu_turbo\":\"${cpu_turbo}\""
-json="${json},\"gpu_min_freq\":\"${gpu_min_freq}\""
-json="${json},\"gpu_max_freq\":\"${gpu_max_freq}\""
-json="${json},\"gpu_min_limit\":\"${gpu_min_limit}\""
-json="${json},\"gpu_max_limit\":\"${gpu_max_limit}\""
-json="${json},\"gpu_boost_freq\":\"${gpu_boost_freq}\""
-json="${json},\"gpu_cur_freq\":\"${gpu_cur_freq}\""
-json="${json},\"cpu_governor\":\"${cpu_governor}\""
-json="${json},\"energy_perf\":\"${energy_perf}\""
-if check_dell_thermal; then
-    json="${json},\"thermal_mode\":\"${thermal_mode}\""
-fi
-if check_lg_drivers; then
-    json="${json},\"lg_battery_charge_limit\":\"${lg_battery_charge_limit}\""
-    json="${json},\"lg_usb_charge\":\"${lg_usb_charge}\""
-    json="${json},\"lg_fan_mode\":\"${lg_fan_mode}\""
-fi
-json="${json}}"
-echo $json
+    if check_lg_drivers; then
+        lg_battery_charge_limit=`cat $LG_BATTERY_CHARGE_LIMIT`
+        if [ "$lg_battery_charge_limit" == "80" ]; then
+            lg_battery_charge_limit="true"
+        else
+            lg_battery_charge_limit="false"
+        fi
+        lg_usb_charge=`cat $LG_USB_CHARGE`
+        if [ "$lg_usb_charge" == "1" ]; then
+            lg_usb_charge="true"
+        else
+            lg_usb_charge="false"
+        fi
+        lg_fan_mode=`cat $LG_FAN_MODE`
+        if [ "$lg_fan_mode" == "1" ]; then
+            lg_fan_mode="false"
+        else
+            lg_fan_mode="true"
+        fi
+    fi
+    json="{"
+    json="${json}\"cpu_min_perf\":\"${cpu_min_perf}\""
+    json="${json},\"cpu_max_perf\":\"${cpu_max_perf}\""
+    json="${json},\"cpu_turbo\":\"${cpu_turbo}\""
+    json="${json},\"gpu_min_freq\":\"${gpu_min_freq}\""
+    json="${json},\"gpu_max_freq\":\"${gpu_max_freq}\""
+    json="${json},\"gpu_min_limit\":\"${gpu_min_limit}\""
+    json="${json},\"gpu_max_limit\":\"${gpu_max_limit}\""
+    json="${json},\"gpu_boost_freq\":\"${gpu_boost_freq}\""
+    json="${json},\"gpu_cur_freq\":\"${gpu_cur_freq}\""
+    json="${json},\"cpu_governor\":\"${cpu_governor}\""
+    json="${json},\"energy_perf\":\"${energy_perf}\""
+    if check_dell_thermal; then
+        json="${json},\"thermal_mode\":\"${thermal_mode}\""
+    fi
+    if check_lg_drivers; then
+        json="${json},\"lg_battery_charge_limit\":\"${lg_battery_charge_limit}\""
+        json="${json},\"lg_usb_charge\":\"${lg_usb_charge}\""
+        json="${json},\"lg_fan_mode\":\"${lg_fan_mode}\""
+    fi
+    json="${json}}"
+    echo $json
 }
 
 case $1 in

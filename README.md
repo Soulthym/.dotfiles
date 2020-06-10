@@ -5,3 +5,6 @@ dotf config --local status.showUntrackedFiles no
 dotf remote add origin https://github.com/Soulthym/.dotfiles.git  
 dotf pull origin master  
 dotf branch --set-upstream-to=origin/master master  
+
+##  vim
+Don't forget to type `:UpdateRemotePlugins` in vim for ipy to work!
