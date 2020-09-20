@@ -1,1 +1,0 @@
-/home/soulthym/.config/vim/

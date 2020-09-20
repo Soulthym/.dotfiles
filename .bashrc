@@ -132,7 +132,9 @@ eval $(keychain --eval --quiet --timeout 10)
 # "# ask for passphrase and forward it to ssh-agent"
 # "AddKeysToAgent yes"
 
-export QSYS_ROOTDIR="/home/soulthym/intelFPGA_lite/17.0/quartus/sopc_builder/bin"
+export QSYS_ROOTDIR="/home/soulthym/.cache/yay/quartus-free/pkg/quartus-free/opt/altera/19.1/quartus/sopc_builder/bin"
+shopt -s globstar
 PATH="$(du $HOME/.local/bin/ | cut -f2 | tr '\n' ':')$PATH"
 export PATH=$PATH:$HOME/.scripts/
-shopt -s globstar
+
+complete -C /usr/bin/terraform terraform
