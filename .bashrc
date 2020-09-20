@@ -1,5 +1,5 @@
 #shopt -s promptvars dotglob histappend no_empty_cmd_completion cdspell xpg_echo
- 
+
 function parse_git_dirty {
   echo -n $(git status 2>/dev/null | awk  '
 BEGIN {
@@ -7,7 +7,7 @@ BEGIN {
 	untracked=""
 	changes=""
 }
-{ 
+{
 	if ($0 == "Changes to be committed:") {
   		state = "uncommitted"
 	} else if ($0 == "Untracked files:") {

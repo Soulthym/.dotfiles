@@ -291,3 +291,8 @@ function! Append(l1, l2, buffer)
 endfunction
 
 command! -nargs=1 -complete=buffer -range Append call Append(<line1>, <line2>, <f-args>)
+
+function! SnipperAdd()
+    let name = input("Name of the snippet:")
+    return name
+endfunction
