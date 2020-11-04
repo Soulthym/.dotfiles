@@ -1,27 +1,54 @@
 set nocompatible            "Sweet VIM features
 set shell=/bin/bash         "if using a non POSIX Compliant shell
+set ttimeoutlen=10
 
-syntax on                   "Syntax highlighting
 filetype plugin on
+nnoremap <SPACE> <Nop>
+let mapleader=" "
 
 " Put plugins and dictionaries in this dir (also on Windows)
 let vimDir = '$HOME/.config/vim'
 let &runtimepath.=','.vimDir
+"let g:python_highlight_all = 1
+"let g:python_slow_sync     = 0
 
 call plug#begin('~/.config/vim/autorun/plugged')
     "Plug 'flazz/vim-colorschemes'
     "Plug 'rafi/awesome-vim-colorschemes'
+    Plug 'Glench/Vim-Jinja2-Syntax'
+    Plug 'inkarkat/vim-SyntaxRange'
+    Plug 'altercation/vim-colors-solarized'
     "Plug 'vim-python/python-syntax'
+    Plug 'sheerun/vim-polyglot'
     "Plug 'dylanaraps/wal.vim'
+    "Plug 'jonathanfilip/vim-lucius'
     Plug 'airblade/vim-gitgutter'
     Plug 'soulthym/vim-focus-buffer'
     Plug 'baskerville/vim-sxhkdrc'
     Plug 'mhartington/oceanic-next'
+    "Plug 'barlog-m/oceanic-primal-vim'
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
     " TODO: set colors for semantic highlighting
     Plug 'jaxbot/semantic-highlight.vim'
-    Plug 'ajutsushi/tagbar'
+    "Plug 'ajutsushi/tagbar'
+    Plug 'patstockwell/vim-monokai-tasty'
+    Plug 'pangloss/vim-javascript'
+    Plug 'MaxMEllon/vim-jsx-pretty'
+    Plug 'styled-components/vim-styled-components'
+    Plug 'elzr/vim-json'
 call plug#end()
+
+set background=dark
+"colorscheme OceanicNext
+let g:vim_monokai_tasty_italic = 1
+colorscheme vim-monokai-tasty
+"colorscheme solarized
+"colorscheme wal
+"colorscheme default
+"hi Normal ctermbg=235
+"hi Folded ctermbg=NONE ctermfg=6 cterm=NONE
+"hi Normal ctermbg=NONE
+"hi LineNr ctermbg=NONE 
 
 " undo history
 if has('persistent_undo')
@@ -35,16 +62,6 @@ endif
 
 let g:mkdp_browser = 'firefox'
 
-set background=dark
-
-"colorscheme wal
-colorscheme OceanicNext
-"colorscheme default
-"set background=light
-hi Normal ctermbg=235
-hi Folded ctermbg=NONE ctermfg=6 cterm=NONE
-"hi Normal ctermbg=NONE
-"hi LineNr ctermbg=NONE 
 
 if has ('autocmd') " Remain compatible with earlier versions
     augroup vimconfig
@@ -62,15 +79,24 @@ if has ('autocmd') " Remain compatible with earlier versions
         autocmd BufWritePost *.vim
                     \ source $MYVIMRC                   |
                     \ source %
+        nmap <leader>s :source $MYVIMRC<cr>
     augroup END
     augroup html
         autocmd!
         autocmd BufNewFile,BufRead *.html
-                    \ set filetype=html                 |
-                    \ set smartindent
+                    \ set filetype=html   |
+                    \ set smartindent     |
+                    \ normal gg=G
+        autocmd BufNewFile,BufRead *.j2
+                    \ set filetype=jinja  |
+                    \ set smartindent     |
+                    \ set tabstop=2       |
+                    \ set shiftwidth=2    |
+                    \ normal gg=G
+        autocmd BufWritePre *.html,*.j2 nnoremap <leader>f mmgg=G`m
     augroup END
     augroup python
-        " Start a terninal window 
+        " Start a terminal window 
         nmap <leader>p :botright vertical terminal ipython --no-autoindent<cr>
     augroup END
     augroup markdown
@@ -78,6 +104,13 @@ if has ('autocmd') " Remain compatible with earlier versions
         "autocmd TextChanged,InsertLeave *.md call TabFormat()
         xmap <leader>T ypVr=
         xmap <leader>t ypVr-
+    augroup END
+    augroup yaml
+        autocmd! 
+        autocmd BufNewFile,BufRead *.yml,*.yaml
+                    \ call SyntaxRange#Include(' py:', '#!py', 'python') |
+                    \ call SyntaxRange#Include(' yado:', '#!yado', 'python') |
+                    \ call SyntaxRange#Include(' html:', '<!-- !html -->', 'html')
     augroup END
     augroup everything
         autocmd!
@@ -114,7 +147,7 @@ if has ('autocmd') " Remain compatible with earlier versions
         " Run a visual selection
         xmap <leader>r <Plug>(send-to-term)
         " Run the current file
-        nnoremap <leader><leader> mlgg\rG`m
+        nmap <leader><leader> mlgg rG`l
         " Run a paragraph easily
         " nmap <leader><leader> mrvap<Plug>(send-to-term)`r
         " Visual inner column [https://stackoverflow.com/a/54686136/10264886]
@@ -124,8 +157,12 @@ if has ('autocmd') " Remain compatible with earlier versions
         nnoremap <c-k> <c-g>
         " remap Ctrl-G for Toggling git-gutter
         nnoremap <c-g> :GitGutterToggle<cr>
-        nnoremap <Leader>s :SemanticHighlightToggle<cr>
+        nnoremap <Leader>S :SemanticHighlightToggle<cr>
         nnoremap <Leader>] :TagbarToggle<cr>
+        " remap Ctrl-W Enter/ Ctrl-W Ctrl-M to maximize window
+
+        nnoremap <c-w><c-m> <c-w><c-_><c-w><bar>:let t:maxed<cr>
+        nmap <c-w>m <c-w><c-m> 
     augroup END
 endif " has autocmd
 set wildmenu                    "helps with tab-completion
@@ -136,6 +173,18 @@ set omnifunc=syntaxcomplete#Complete
 set splitright
 set splitbelow
 
+"augroup python
+"    autocmd!
+"    autocmd BufNewFile,BufRead *.py
+"                \ set filetype=python |
+"                \ set textwidth=0     | "don't wrap the line automatically
+"                \ set tabstop=8       | "tab character's width
+"                \ set softtabstop=0   | 
+"                \ set shiftwidth=4    |
+"                \ set expandtab       |
+"                \ set autoindent      |
+"                \ set smarttab        |
+"augroup END
 set textwidth=0                 "don't wrap the line automatically
 set tabstop=8                   "tab character's width
 set softtabstop=0               
@@ -152,10 +201,15 @@ set number
 set fileformat=unix
 set modeline " file specific tweeks
 
+
 filetype indent on
 
 " TODO: Nested filetypes for syntax highlighting
-"runtime! syntax/xml.vim
+"runtime! syntax/yaml.vim
+"unlet b:current_syntax
+"syntax include @Python syntax/python.vim
+"syntax region pythonCode  start='#ft=python' keepend end='#ft'  contains=@Python
+"runtime! syntax/python.vim
 "unlet b:current_syntax
 "syntax include @Python syntax/python.vim
 "syntax region pythonCode  start=+<Python>+ keepend end=+/</Python>+  contains=@Python
@@ -179,7 +233,6 @@ filetype indent on
 "let g:python_highlight_func_calls = 1
 "let g:python_highlight_class_vars = 1
 "let g:python_highlight_operators = 1
-"let g:python_highlight_all = 1
 "let g:python_highlight_file_headers_as_comments = 1
 "let g:python_slow_sync = 1
 "

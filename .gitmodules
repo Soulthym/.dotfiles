@@ -1,6 +1,3 @@
 [submodule ".config/vim/.config/vim/plugin/focus-buffer"]
 	path = .config/vim/.config/vim/plugin/focus-buffer
 	url = git@github.com:Soulthym/focus-buffer.git
-[submodule ".config/vim/plugin/focus-buffer"]
-	path = .config/vim/plugin/focus-buffer
-	url = git@github.com:Soulthym/focus-buffer.git
