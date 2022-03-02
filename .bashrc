@@ -1,5 +1,7 @@
 export EDITOR=vim
 export DISPLAY=localhost:0
+shopt -s autocd
+
 alias xps="ssh -p1122 soulthym@192.168.0.116"
 alias pa='ssh pandastrobot@35.198.64.128'
 alias venv='virtualenv -p=python3 .$(basename "$PWD")'
